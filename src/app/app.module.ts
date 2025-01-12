@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AuthModule } from './modules/auth/auth.module';
+import { SupabaseClientModule } from './modules/supabase-client/supabase-client.module';
+import { TimeClockModule } from './modules/time-clock/time-clock.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [SupabaseClientModule.forRoot(), AuthModule, TimeClockModule],
+  providers: [],
 })
 export class AppModule {}
