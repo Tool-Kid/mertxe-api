@@ -6,7 +6,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "railway": "npx nx run mertxe:serve:production"
+    "railway": "npx nx run mertxe:build:production && node dist/mertxe/main.js"
   },
   "private": true,
   "dependencies": {
