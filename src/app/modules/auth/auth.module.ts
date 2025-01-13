@@ -7,8 +7,8 @@ import { RegisterController } from './register/register.controller';
   imports: [
     JwtModule.register({
       global: true,
-      secret: 'THIS_IS_SECRET',
-      signOptions: { expiresIn: '60s' },
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '90d' },
     }),
   ],
   controllers: [LoginController, RegisterController],
