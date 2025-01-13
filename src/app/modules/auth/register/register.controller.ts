@@ -5,13 +5,15 @@ import { OPEN_API_TAG } from 'src/openapi';
 import { RegisterDto, RegisterResponse } from './register.dto';
 import { AuthService } from '../domain/auth.service';
 import { Public } from '../infra/http';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('auth/register')
 @ApiTags(OPEN_API_TAG.AUTH)
 export class RegisterController {
   constructor(
     private readonly supabaseClient: SupabaseClient,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly jwtService: JwtService
   ) {}
 
   @Post()
@@ -33,13 +35,17 @@ export class RegisterController {
       password: dto.password,
     });
 
-    await this.supabaseClient.instance
+    const profile = await this.supabaseClient.instance
       .from('UserProfile')
       .insert([{ user_id: user.id, scoring: 1000 }])
       .select();
 
     return {
       user: user,
+      accessToken: this.jwtService.sign({ supabase: user, credentials: dto }),
+      profile: {
+        scoring: profile.data[0].scoring,
+      },
     };
   }
 }

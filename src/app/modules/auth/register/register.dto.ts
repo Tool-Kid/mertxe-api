@@ -4,6 +4,9 @@ export class RegisterDto {
 }
 
 export class RegisterResponse {
-  user?: any;
-  error?: string;
+  user: any;
+  accessToken: string;
+  profile: {
+    scoring: number;
+  };
 }
