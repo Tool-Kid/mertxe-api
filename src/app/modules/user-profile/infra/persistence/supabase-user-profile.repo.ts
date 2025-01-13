@@ -14,7 +14,7 @@ export class SupabaseUserProfileRepository implements UserProfileRepository {
     };
 
     await this.supabaseClient.instance
-      .from('UserProfile')
+      .from('UserProfiles')
       .insert([
         { user_id: defaultProfile.id, scoring: defaultProfile.scoring },
       ]);
@@ -27,7 +27,7 @@ export class SupabaseUserProfileRepository implements UserProfileRepository {
 
   async getUserProfile(): Promise<UserProfile> {
     const client = await this.supabaseClient.getClient();
-    const { data } = await client.from('UserProfile').select('*');
+    const { data } = await client.from('UserProfiles').select('*');
     return {
       id: '',
       scoring: data[0].scoring,

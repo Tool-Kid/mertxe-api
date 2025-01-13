@@ -31,7 +31,6 @@ export class SupabaseClient {
 
     const jwtToken = ExtractJwt.fromAuthHeaderAsBearerToken()(this.request);
     const decodedJwtToken = this.jwtService.decode(jwtToken);
-    console.log(decodedJwtToken);
 
     await this.instance.auth.signInWithPassword({
       email: decodedJwtToken.credentials.email,

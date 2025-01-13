@@ -36,7 +36,7 @@ export class RegisterController {
     });
 
     const profile = await this.supabaseClient.instance
-      .from('UserProfile')
+      .from('UserProfiles')
       .insert([{ user_id: user.id, scoring: 1000 }])
       .select();
 

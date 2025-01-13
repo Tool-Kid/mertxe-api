@@ -29,7 +29,7 @@ export class LoginController {
     }
 
     const profile = await this.supabaseClient.instance
-      .from('UserProfile')
+      .from('UserProfiles')
       .select('*');
 
     return {
