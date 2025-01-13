@@ -1,32 +1,22 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { SupabaseClient } from '../../supabase-client';
 import { JwtService } from '@nestjs/jwt';
-
-export class LoginDto {
-  email: string;
-  password: string;
-}
-
-export class LoginResponse {
-  user: any;
-  accessToken: string;
-  profile: {
-    scoring: number;
-  };
-}
+import { ApiTags } from '@nestjs/swagger';
+import { OPEN_API_TAG } from 'src/openapi';
+import { LoginDto, LoginResponse } from './login.dto';
 
 @Controller('auth/login')
+@ApiTags(OPEN_API_TAG.AUTH)
 export class LoginController {
   constructor(
     private readonly supabaseClient: SupabaseClient,
     private readonly jwtService: JwtService
   ) {}
 
-  @Post('')
+  @Post()
   async login(@Body() dto: LoginDto): Promise<LoginResponse> {
-    const { data, error } = await this.supabaseClient
-      .getClient()
-      .auth.signInWithPassword({
+    const { data, error } =
+      await this.supabaseClient.instance.auth.signInWithPassword({
         email: dto.email,
         password: dto.password,
       });

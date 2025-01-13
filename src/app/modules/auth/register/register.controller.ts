@@ -1,21 +1,15 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { SupabaseClient } from '../../supabase-client';
-
-export class RegisterDto {
-  email: string;
-  password: string;
-}
-
-export class RegisterResponse {
-  user?: any;
-  error?: string;
-}
+import { ApiTags } from '@nestjs/swagger';
+import { OPEN_API_TAG } from 'src/openapi';
+import { RegisterDto, RegisterResponse } from './register.dto';
 
 @Controller('auth/register')
+@ApiTags(OPEN_API_TAG.AUTH)
 export class RegisterController {
   constructor(private readonly supabaseClient: SupabaseClient) {}
 
-  @Post('')
+  @Post()
   async register(@Body() dto: RegisterDto): Promise<RegisterResponse> {
     const { data, error } = await this.supabaseClient.instance.auth.signUp({
       email: dto.email,
