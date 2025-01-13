@@ -1,0 +1,183 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-01-13T10:51:32.402Z",
+  "__export_source": "insomnia.desktop.app:v10.3.0",
+  "resources": [
+    {
+      "_id": "req_eb80458c8f344f199e3cbdcc4c02201e",
+      "parentId": "fld_c9a93d51741a421592619739fcdcabaa",
+      "modified": 1736722388984,
+      "created": 1736556300333,
+      "url": "{{API_URL}}/api/auth/register",
+      "name": "Register",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"rjlopezmad@gmail.com\",\n\t\"password\": \"test1234\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "User-Agent", "value": "insomnia/8.4.0" }
+      ],
+      "authentication": {},
+      "metaSortKey": -1736722383270,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_c9a93d51741a421592619739fcdcabaa",
+      "parentId": "wrk_6425832e5f4e44c7b4dc632a4217cb5b",
+      "modified": 1736722379949,
+      "created": 1736722379949,
+      "name": "Auth",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1736722379950,
+      "environmentType": "kv",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_6425832e5f4e44c7b4dc632a4217cb5b",
+      "parentId": null,
+      "modified": 1736541177170,
+      "created": 1736541177170,
+      "name": "Mertxe API",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_c9fc711aab4940528a5404ea17da81da",
+      "parentId": "fld_c9a93d51741a421592619739fcdcabaa",
+      "modified": 1736722383202,
+      "created": 1736541183913,
+      "url": "{{API_URL}}/api/auth/login",
+      "name": "Log In",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"rjlopezmad@gmail.com\",\n\t\"password\": \"test1234\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "User-Agent", "value": "insomnia/8.4.0" }
+      ],
+      "authentication": {},
+      "metaSortKey": -1736722383170,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6e8b0dcb029b4a7cab0714a530887640",
+      "parentId": "wrk_6425832e5f4e44c7b4dc632a4217cb5b",
+      "modified": 1736719782950,
+      "created": 1736542192277,
+      "url": "{{API_URL}}/api/clock-in",
+      "name": "Clock In",
+      "description": "",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [{ "name": "User-Agent", "value": "insomnia/8.4.0" }],
+      "authentication": {},
+      "metaSortKey": -1736542192277,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_efd90f189aeb558ac2cc4122287bb8f152482b70",
+      "parentId": "wrk_6425832e5f4e44c7b4dc632a4217cb5b",
+      "modified": 1736541177172,
+      "created": 1736541177172,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1736541177173,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_efd90f189aeb558ac2cc4122287bb8f152482b70",
+      "parentId": "wrk_6425832e5f4e44c7b4dc632a4217cb5b",
+      "modified": 1736541177173,
+      "created": 1736541177173,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "env_04a447273b034acb838390f1dedb2844",
+      "parentId": "env_efd90f189aeb558ac2cc4122287bb8f152482b70",
+      "modified": 1736719692028,
+      "created": 1736719596228,
+      "name": "Local",
+      "data": { "API_URL": "http://localhost:3000" },
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1736719596229,
+      "environmentType": "kv",
+      "kvPairData": [
+        {
+          "id": "envPair_a75889e194b048088bea8243df6a54a9",
+          "name": "API_URL",
+          "value": "http://localhost:3000",
+          "type": "str",
+          "enabled": true
+        }
+      ],
+      "_type": "environment"
+    },
+    {
+      "_id": "env_44535fcffd524b4eba886213d084148b",
+      "parentId": "env_efd90f189aeb558ac2cc4122287bb8f152482b70",
+      "modified": 1736721385681,
+      "created": 1736719629849,
+      "name": "Prod",
+      "data": { "API_URL": "https://mertxe-api-production.up.railway.app" },
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1736719629849,
+      "environmentType": "kv",
+      "kvPairData": [
+        {
+          "id": "envPair_d3900c7ec33649b78722298380eb3bfd",
+          "name": "API_URL",
+          "value": "https://mertxe-api-production.up.railway.app",
+          "type": "str",
+          "enabled": true
+        }
+      ],
+      "_type": "environment"
+    }
+  ]
+}
