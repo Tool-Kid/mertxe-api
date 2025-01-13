@@ -48,7 +48,7 @@ export class SupabaseTimeclockRepository implements TimeClockRepository {
     });
   }
 
-  async getClockInRecords(): Promise<TimeClockRecord[]> {
+  async getTimeClockRecords(): Promise<TimeClockRecord[]> {
     const client = await this.supabaseClient.getClient();
     const clockRecords = await client.from(this.tableName).select('*');
 
