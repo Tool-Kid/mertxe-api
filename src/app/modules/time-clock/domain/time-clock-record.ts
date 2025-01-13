@@ -4,7 +4,7 @@ interface ClockInRecordProps {
   clockOutAt: string;
 }
 
-export class ClockInRecord implements ClockInRecordProps {
+export class TimeClockRecord implements ClockInRecordProps {
   id: number;
   clockInAt: string;
   clockOutAt: string;

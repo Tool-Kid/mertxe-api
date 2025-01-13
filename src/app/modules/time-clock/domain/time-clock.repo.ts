@@ -1,7 +1,7 @@
-import { ClockInRecord } from './clock-in-record';
+import { TimeClockRecord } from './time-clock-record';
 
 export abstract class TimeClockRepository {
-  abstract clockIn(): Promise<ClockInRecord>;
-  abstract clockOut(): Promise<ClockInRecord>;
-  abstract getClockInRecords(): Promise<ClockInRecord[]>;
+  abstract clockIn(): Promise<TimeClockRecord>;
+  abstract clockOut(): Promise<TimeClockRecord>;
+  abstract getClockInRecords(): Promise<TimeClockRecord[]>;
 }

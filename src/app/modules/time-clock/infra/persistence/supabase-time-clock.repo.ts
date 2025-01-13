@@ -1,5 +1,5 @@
 import { SupabaseClient } from '@common/supabase-client';
-import { ClockInRecord } from '../../domain/clock-in-record';
+import { TimeClockRecord } from '../../domain/time-clock-record';
 import { TimeClockRepository } from '../../domain/time-clock.repo';
 import { Injectable } from '@nestjs/common';
 
@@ -8,7 +8,7 @@ export class SupabaseTimeclockRepository implements TimeClockRepository {
   readonly tableName = 'ClockInRecords';
   constructor(private readonly supabaseClient: SupabaseClient) {}
 
-  async clockIn(): Promise<ClockInRecord> {
+  async clockIn(): Promise<TimeClockRecord> {
     const client = await this.supabaseClient.getClient();
     const userId = (await client.auth.getUser()).data.user.id;
 
@@ -18,14 +18,14 @@ export class SupabaseTimeclockRepository implements TimeClockRepository {
       .select('*');
     const clockInRecord = data[0];
 
-    return new ClockInRecord({
+    return new TimeClockRecord({
       id: clockInRecord.id,
       clockInAt: clockInRecord.clock_in_at,
       clockOutAt: clockInRecord.clock_out_at,
     });
   }
 
-  async clockOut(): Promise<ClockInRecord> {
+  async clockOut(): Promise<TimeClockRecord> {
     const client = await this.supabaseClient.getClient();
     const userId = (await client.auth.getUser()).data.user.id;
 
@@ -41,20 +41,20 @@ export class SupabaseTimeclockRepository implements TimeClockRepository {
       .select('*');
     const clockInRecord = data[0];
 
-    return new ClockInRecord({
+    return new TimeClockRecord({
       id: clockInRecord.id,
       clockInAt: clockInRecord.clock_in_at,
       clockOutAt: clockInRecord.clock_out_at,
     });
   }
 
-  async getClockInRecords(): Promise<ClockInRecord[]> {
+  async getClockInRecords(): Promise<TimeClockRecord[]> {
     const client = await this.supabaseClient.getClient();
     const clockRecords = await client.from(this.tableName).select('*');
 
     return clockRecords.data.map(
       (record) =>
-        new ClockInRecord({
+        new TimeClockRecord({
           id: record.id,
           clockInAt: record.clock_in_at,
           clockOutAt: record.clock_out_at,
