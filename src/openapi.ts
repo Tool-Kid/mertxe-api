@@ -14,4 +14,5 @@ export function setupOpenApi(app: INestApplication) {
 export const OPEN_API_TAG = {
   AUTH: 'Auth',
   TIME_CLOCK: 'Time clock',
+  USER_PROFILE: 'User Profile',
 };

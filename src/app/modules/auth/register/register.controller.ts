@@ -1,9 +1,10 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
-import { SupabaseClient } from '../../supabase-client';
+import { SupabaseClient } from '../../../common/supabase-client';
 import { ApiTags } from '@nestjs/swagger';
 import { OPEN_API_TAG } from 'src/openapi';
 import { RegisterDto, RegisterResponse } from './register.dto';
 import { AuthService } from '../domain/auth.service';
+import { Public } from '../infra/http';
 
 @Controller('auth/register')
 @ApiTags(OPEN_API_TAG.AUTH)
@@ -14,6 +15,7 @@ export class RegisterController {
   ) {}
 
   @Post()
+  @Public()
   async register(@Body() dto: RegisterDto): Promise<RegisterResponse> {
     const { user, status } = await this.authService.register({
       email: dto.email,

@@ -1,10 +1,11 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
-import { SupabaseClient } from '../../supabase-client';
+import { SupabaseClient } from '../../../common/supabase-client';
 import { JwtService } from '@nestjs/jwt';
 import { ApiTags } from '@nestjs/swagger';
 import { OPEN_API_TAG } from 'src/openapi';
 import { LoginDto, LoginResponse } from './login.dto';
 import { AuthService } from '../domain/auth.service';
+import { Public } from '../infra/http';
 
 @Controller('auth/login')
 @ApiTags(OPEN_API_TAG.AUTH)
@@ -16,6 +17,7 @@ export class LoginController {
   ) {}
 
   @Post()
+  @Public()
   async login(@Body() dto: LoginDto): Promise<LoginResponse> {
     const { status, user } = await this.authService.login({
       email: dto.email,
@@ -35,7 +37,7 @@ export class LoginController {
       profile: {
         scoring: profile.data[0].scoring,
       },
-      accessToken: this.jwtService.sign({ user }),
+      accessToken: this.jwtService.sign({ supabase: user, credentials: dto }),
     };
   }
 }

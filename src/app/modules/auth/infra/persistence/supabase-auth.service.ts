@@ -1,15 +1,15 @@
+import { Injectable } from '@nestjs/common';
 import {
   AuthService,
   Credentials,
   LoginResult,
   RegisterResult,
 } from '../../domain/auth.service';
-import { Inject } from '@nestjs/common';
-import { SupabaseClient } from 'src/app/modules/supabase-client';
-import { AuthUser } from '../../domain/auth-user';
+import { SupabaseClient } from '@common/supabase-client';
 
+@Injectable()
 export class SupabaseAuthService implements AuthService {
-  @Inject(SupabaseClient) private readonly supabaseClient: SupabaseClient;
+  constructor(private readonly supabaseClient: SupabaseClient) {}
 
   async register(credentials: Credentials): Promise<RegisterResult> {
     const { data, error } = await this.supabaseClient.instance.auth.signUp({

@@ -4,14 +4,14 @@ import { Injectable, Logger } from '@nestjs/common';
 import { AuthUser } from '@supabase/supabase-js';
 
 @Injectable()
-export class SupabaseStrategy extends PassportStrategy(Strategy) {
-  private readonly logger = new Logger(SupabaseStrategy.name);
+export class JWTStrategy extends PassportStrategy(Strategy) {
+  private readonly logger = new Logger(JWTStrategy.name);
 
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: true,
-      secretOrKey: '',
+      secretOrKey: process.env.JWT_SECRET,
     });
   }
 
