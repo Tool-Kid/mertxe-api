@@ -2,6 +2,7 @@ import { SupabaseClient } from '@common/supabase-client';
 import { TimeClockRecord } from '../../domain/time-clock-record';
 import { TimeClockRepository } from '../../domain/time-clock.repo';
 import { Injectable } from '@nestjs/common';
+import { InvalidOperationException } from '@common/error';
 
 @Injectable()
 export class SupabaseTimeclockRepository implements TimeClockRepository {
@@ -11,6 +12,18 @@ export class SupabaseTimeclockRepository implements TimeClockRepository {
   async clockIn(): Promise<TimeClockRecord> {
     const client = await this.supabaseClient.getClient();
     const userId = (await client.auth.getUser()).data.user.id;
+
+    const recordWithNotClockOutAt = await client
+      .from(this.tableName)
+      .select('*')
+      .filter('clock_out_at', 'is', null);
+
+    const hasClockInSessionStarted =
+      recordWithNotClockOutAt.data.at(0) !== null;
+
+    if (hasClockInSessionStarted) {
+      throw new InvalidOperationException('Session already started');
+    }
 
     const { data } = await client
       .from(this.tableName)
