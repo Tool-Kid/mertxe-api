@@ -18,8 +18,8 @@ export class SupabaseScoringRecordsRepository
     const { data } = await client
       .from(this.tableName)
       .insert({
-        amount: record.amount,
-        reason: record.reason,
+        amount: record.getRaw().amount,
+        reason: record.getRaw().reason,
       })
       .select('*');
     const created = data[0];
