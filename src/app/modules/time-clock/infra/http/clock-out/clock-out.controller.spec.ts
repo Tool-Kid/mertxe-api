@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ClockOutController } from './clock-out.controller';
+import { ClockOutController } from '../clock-out.controller';
 
 describe('ClockOutController', () => {
   let controller: ClockOutController;

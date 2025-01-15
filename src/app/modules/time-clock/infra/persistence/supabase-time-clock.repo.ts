@@ -13,15 +13,15 @@ export class SupabaseTimeclockRepository implements TimeClockRepository {
     const client = await this.supabaseClient.getClient();
     const userId = (await client.auth.getUser()).data.user.id;
 
-    const recordWithNotClockOutAt = await client
+    const record = await client
       .from(this.tableName)
       .select('*')
       .filter('clock_out_at', 'is', null);
 
-    const hasClockInSessionStarted =
-      recordWithNotClockOutAt.data.at(0) !== null;
+    const isFirstClockIn = record.count === null;
+    const hasClockInSessionStarted = record.data.at(0);
 
-    if (hasClockInSessionStarted) {
+    if (!isFirstClockIn || hasClockInSessionStarted) {
       throw new InvalidOperationException('Session already started');
     }
 
