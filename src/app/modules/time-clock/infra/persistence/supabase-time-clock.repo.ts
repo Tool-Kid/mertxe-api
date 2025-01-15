@@ -22,7 +22,7 @@ export class SupabaseTimeclockRepository implements TimeClockRepository {
     const hasClockInSessionStarted = record.data.at(0);
 
     if (!isFirstClockIn || hasClockInSessionStarted) {
-      throw new InvalidOperationException('Session already started');
+      throw new InvalidOperationException('Session already active');
     }
 
     const { data } = await client
@@ -46,6 +46,12 @@ export class SupabaseTimeclockRepository implements TimeClockRepository {
       .from(this.tableName)
       .select('*')
       .filter('clock_out_at', 'is', null);
+
+    const noSessionStarted = currentClockRecord.count === null;
+
+    if (noSessionStarted) {
+      throw new InvalidOperationException('No session active');
+    }
 
     const { data } = await client
       .from(this.tableName)
