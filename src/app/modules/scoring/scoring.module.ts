@@ -6,8 +6,12 @@ import { SupabaseScoringRecordsRepository } from './infra/persistence/supabase-s
 import { GetScoringRecordsQryHdlr } from './application/get-scoring-records/get-scoring-records.qry.hdlr';
 import { GetScoringRecordsController } from './infra/http/get-scoring-records/get-scoring-records.controller';
 import { ClsModule } from 'nestjs-cls';
+import { TimeClockSessionFinishedEventHandler } from './application/time-clock-session-finished/time-clock-session-finised-event.hdlr';
 
-const EVENT_HANDLERS = [UserRegisteredEventHandler];
+const EVENT_HANDLERS = [
+  UserRegisteredEventHandler,
+  TimeClockSessionFinishedEventHandler,
+];
 const QUERY_HANDLERS = [GetScoringRecordsQryHdlr];
 
 @Module({

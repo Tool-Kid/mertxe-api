@@ -18,9 +18,10 @@ export class ClockOutCmdHdlr
   async execute(command: ClockOutCmd): Promise<TimeClockRecord> {
     const result = await this.timeClockRepository.clockOut();
 
-    await this.eventBus.publish(
+    const event = await this.eventBus.publish(
       new TimeClockSessionFinished(result.clockInAt, result.clockOutAt)
     );
+
     return result;
   }
 }

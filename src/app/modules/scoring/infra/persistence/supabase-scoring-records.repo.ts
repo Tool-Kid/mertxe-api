@@ -16,14 +16,17 @@ export class SupabaseScoringRecordsRepository
     record: Partial<ScoringRecord>
   ): Promise<ScoringRecord> {
     const client = await this.supabaseClient.getClient();
+    const user = await client.auth.getUser();
 
-    const { data } = await client
+    const { data, error } = await client
       .from(this.tableName)
       .insert({
         amount: record.getRaw().amount,
         reason: record.getRaw().reason,
+        user_id: user.data.user.id,
       })
       .select('*');
+
     const created = data[0];
 
     return new ScoringRecord({
