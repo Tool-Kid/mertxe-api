@@ -4,7 +4,7 @@ import { UserRegisteredEventHandler } from './application/user-registered-event.
 import { CqrsModule } from '@nestjs/cqrs';
 import { SupabaseScoringRecordsRepository } from './infra/persistence/supabase-scoring-records.repo';
 
-// const EVENT_HANDLERS = [UserRegisteredEventHandler];
+const EVENT_HANDLERS = [UserRegisteredEventHandler];
 
 @Module({
   imports: [CqrsModule],
@@ -13,7 +13,7 @@ import { SupabaseScoringRecordsRepository } from './infra/persistence/supabase-s
       provide: ScoringRecordsRepository,
       useClass: SupabaseScoringRecordsRepository,
     },
-    // ...EVENT_HANDLERS,
+    ...EVENT_HANDLERS,
   ],
 })
 export class ScoringModule {}

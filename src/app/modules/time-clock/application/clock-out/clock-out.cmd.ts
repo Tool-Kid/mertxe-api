@@ -1,7 +1,8 @@
 import { TimeClockRecord } from '../../domain/time-clock-record';
 import { TimeClockRepository } from '../../domain/time-clock.repo';
 import { TimeClockSessionFinished } from '../../domain/time-clock-session-finished.event';
-import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { EventBus } from '@common/events';
 
 export class ClockOutCmd {}
 

@@ -6,9 +6,8 @@ import { RegisterDto, RegisterResponse } from './register.dto';
 import { AuthService } from '../../../domain/auth.service';
 import { Public } from '..';
 import { JwtService } from '@nestjs/jwt';
-import { EVENTS } from '@common/events/events';
 import { UserRegisteredEvent } from '../../../domain/user-registered.event';
-import { EventBus } from '@nestjs/cqrs';
+import { EventBus } from '@common/events';
 
 @Controller('auth/register')
 @ApiTags(OPEN_API_TAG.AUTH)
@@ -59,7 +58,7 @@ export class RegisterController {
       user: user,
       accessToken: this.jwtService.sign({ supabase: user, credentials: dto }),
       profile: {
-        scoring: profile.data[0].scoring,
+        scoring: 1000,
       },
     };
   }
