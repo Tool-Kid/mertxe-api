@@ -13,7 +13,6 @@ export class UserRegisteredEventHandler
 
   async execute(event: UserRegisteredEvent) {
     const scoringRecord = new RegisterScoringRecord();
-    console.log(this.scoringRecordsRepository);
     await this.scoringRecordsRepository.addRegisterScoringRecord(event.userId);
     return scoringRecord.getRaw();
   }

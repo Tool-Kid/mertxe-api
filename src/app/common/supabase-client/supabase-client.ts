@@ -23,7 +23,7 @@ export class SupabaseClient {
   async getClient() {
     const jwtToken = this.getJwtToken();
 
-    const clientKey = this.request.body.email || jwtToken.credentials.email;
+    const clientKey = this.request?.body?.email || jwtToken.credentials.email;
     let client = this.clientsPoll.get(clientKey);
 
     if (!client) {
@@ -40,7 +40,10 @@ export class SupabaseClient {
   }
 
   private getJwtToken() {
-    const jwtToken = this.cls.get('jwt_token');
+    const jwtToken = (this.cls.get('jwt_token') as string)?.replace(
+      'Bearer ',
+      ''
+    );
     const decodedJwtToken = this.jwtService.decode(jwtToken);
     return decodedJwtToken;
   }
@@ -48,9 +51,9 @@ export class SupabaseClient {
   private async loginWithUser(client: SupabaseClient$) {
     const jwtToken = this.getJwtToken();
 
-    const email = this.request.body.email ?? jwtToken.credentials.email;
+    const email = this.request?.body?.email ?? jwtToken.credentials.email;
     const password =
-      this.request.body.password ?? jwtToken.credentials.password;
+      this.request?.body?.password ?? jwtToken.credentials.password;
 
     await client.auth.signInWithPassword({
       email,

@@ -2,7 +2,7 @@ import { Aggregate } from 'types-ddd';
 import { ScoringRecordReason } from './scoring-record-reason';
 import { ScoringRecordFactory } from './types/factory';
 
-interface ScoringRecordProps {
+export interface ScoringRecordProps {
   id?: number;
   createdAt?: string;
   amount: number;
