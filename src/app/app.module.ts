@@ -9,11 +9,20 @@ import { CatchExceptionFilter } from '@common/error/catch-exception.filter';
 import { ScoringModule } from './modules/scoring/scoring.module';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventsModule } from '@common/events';
+import { ClsModule } from 'nestjs-cls';
 
 const THIRD_PARTY_MODULES = [
   SupabaseClientModule.forRoot(),
   EventsModule.forRoot(),
-  CqrsModule.forRoot(),
+  CqrsModule.forRoot({}),
+  ClsModule.forRoot({
+    middleware: {
+      mount: true,
+      setup: (cls, req) => {
+        cls.set('jwt_token', req.headers['authorization']);
+      },
+    },
+  }),
 ];
 
 const FEATURE_MODULES = [

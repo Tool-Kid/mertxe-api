@@ -5,9 +5,9 @@ import {
   createClient,
   SupabaseClient as SupabaseClient$,
 } from '@supabase/supabase-js';
-import { ExtractJwt } from 'passport-jwt';
 import { SupabaseClientConfig } from './supabase-client-config';
 import { JwtService } from '@nestjs/jwt';
+import { ClsService } from 'nestjs-cls';
 
 @Injectable()
 export class SupabaseClient {
@@ -16,15 +16,14 @@ export class SupabaseClient {
   constructor(
     @Inject(REQUEST) private readonly request: Request,
     private readonly config: SupabaseClientConfig,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
+    private readonly cls: ClsService
   ) {}
 
   async getClient() {
-    const jwtToken = ExtractJwt.fromAuthHeaderAsBearerToken()(this.request);
-    const decodedJwtToken = this.jwtService.decode(jwtToken);
+    const jwtToken = this.getJwtToken();
 
-    const clientKey =
-      this.request.body.email || decodedJwtToken.credentials.email;
+    const clientKey = this.request.body.email || jwtToken.credentials.email;
     let client = this.clientsPoll.get(clientKey);
 
     if (!client) {
@@ -40,13 +39,18 @@ export class SupabaseClient {
     return createClient(this.config.url, this.config.token, {});
   }
 
-  private async loginWithUser(client: SupabaseClient$) {
-    const jwtToken = ExtractJwt.fromAuthHeaderAsBearerToken()(this.request);
+  private getJwtToken() {
+    const jwtToken = this.cls.get('jwt_token');
     const decodedJwtToken = this.jwtService.decode(jwtToken);
+    return decodedJwtToken;
+  }
 
-    const email = this.request.body.email ?? decodedJwtToken.credentials.email;
+  private async loginWithUser(client: SupabaseClient$) {
+    const jwtToken = this.getJwtToken();
+
+    const email = this.request.body.email ?? jwtToken.credentials.email;
     const password =
-      this.request.body.password ?? decodedJwtToken.credentials.password;
+      this.request.body.password ?? jwtToken.credentials.password;
 
     await client.auth.signInWithPassword({
       email,

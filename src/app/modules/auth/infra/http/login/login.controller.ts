@@ -28,8 +28,8 @@ export class LoginController {
       throw new BadRequestException('Wrong credentials');
     }
 
-      const client = await this.supabaseClient.getClient();
-      const profile = await client.from('UserProfiles').select('*');
+    const client = await this.supabaseClient.getClient();
+    const profile = await client.from('UserProfiles').select('*');
 
     return {
       user,
