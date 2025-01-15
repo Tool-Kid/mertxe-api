@@ -20,6 +20,8 @@ const THIRD_PARTY_MODULES = [
       mount: true,
       setup: (cls, req) => {
         cls.set('jwt_token', req.headers['authorization']);
+        cls.set('email', req.body.email);
+        cls.set('password', req.body.password);
       },
     },
   }),

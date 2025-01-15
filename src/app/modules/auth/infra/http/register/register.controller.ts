@@ -51,14 +51,14 @@ export class RegisterController {
 
     await client
       .from('UserProfiles')
-      .update({ scoring: 1000 })
+      .update({ scoring: result.amount })
       .eq('user_id', user.id);
 
     return {
       user: user,
       accessToken: this.jwtService.sign({ supabase: user, credentials: dto }),
       profile: {
-        scoring: 1000,
+        scoring: result.amount,
       },
     };
   }

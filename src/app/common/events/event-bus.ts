@@ -6,7 +6,7 @@ export class EventBus {
   constructor(private readonly bus: CommandBus) {}
 
   async publish<Event>(event: Event): Promise<any> {
-    // const result = await this.bus.execute(event);
-    return null;
+    const result = await this.bus.execute(event);
+    return result;
   }
 }
