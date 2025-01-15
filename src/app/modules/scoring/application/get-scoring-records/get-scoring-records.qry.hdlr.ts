@@ -11,8 +11,8 @@ export class GetScoringRecordsQryHdlr
     private readonly scoringRecordsRepository: ScoringRecordsRepository
   ) {}
 
-  execute(query: GetScoringRecordsQry): Promise<ScoringRecord[]> {
-    const result = this.scoringRecordsRepository.getScoringRecords();
+  async execute(query: GetScoringRecordsQry): Promise<ScoringRecord[]> {
+    const result = await this.scoringRecordsRepository.getScoringRecords();
     return result;
   }
 }

@@ -64,8 +64,12 @@ export class SupabaseScoringRecordsRepository
 
   async getScoringRecords(): Promise<ScoringRecord[]> {
     const client = await this.supabaseClient.getClient();
+    const userId = (await client.auth.getUser()).data.user.id;
 
-    const { data } = await client.from(this.tableName).select('*');
+    const { data } = await client
+      .from(this.tableName)
+      .select('*')
+      .eq('user_id', userId);
 
     return data.map(
       (record) =>
