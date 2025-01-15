@@ -39,7 +39,9 @@ export class RegisterController {
       password: dto.password,
     });
 
-    const profile = await this.supabaseClient.instance
+    const client = await this.supabaseClient.getClient();
+
+    const profile = await client
       .from('UserProfiles')
       .insert({ user_id: user.id })
       .select('*');
@@ -48,7 +50,7 @@ export class RegisterController {
       new UserRegisteredEvent(user.id)
     );
 
-    await this.supabaseClient.instance
+    await client
       .from('UserProfiles')
       .update({ scoring: 1000 })
       .eq('user_id', user.id);

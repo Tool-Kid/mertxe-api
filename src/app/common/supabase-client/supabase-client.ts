@@ -1,4 +1,4 @@
-import { Inject, Injectable, Scope } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Request } from 'express';
 import { REQUEST } from '@nestjs/core';
 import {
@@ -9,14 +9,9 @@ import { ExtractJwt } from 'passport-jwt';
 import { SupabaseClientConfig } from './supabase-client-config';
 import { JwtService } from '@nestjs/jwt';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class SupabaseClient {
-  readonly instance: SupabaseClient$ = createClient(
-    this.config.url,
-    this.config.token,
-    {}
-  );
-  private authenticated = false;
+  private clientsPoll = new Map<string, SupabaseClient$>([]);
 
   constructor(
     @Inject(REQUEST) private readonly request: Request,
@@ -25,38 +20,39 @@ export class SupabaseClient {
   ) {}
 
   async getClient() {
-    if (this.authenticated) {
-      return this.instance;
+    const jwtToken = ExtractJwt.fromAuthHeaderAsBearerToken()(this.request);
+    const decodedJwtToken = this.jwtService.decode(jwtToken);
+
+    const clientKey =
+      this.request.body.email || decodedJwtToken.credentials.email;
+    let client = this.clientsPoll.get(clientKey);
+
+    if (!client) {
+      client = createClient(this.config.url, this.config.token, {});
+      client = await this.loginWithUser(client);
+      this.clientsPoll.set(clientKey, client);
     }
 
-    await this.loginWithUser();
-
-    this.authenticated = true;
-
-    return this.instance;
+    return client;
   }
 
-  private isOutOfRequestContext() {
-    return !this.request.body;
+  public getEmptyClient() {
+    return createClient(this.config.url, this.config.token, {});
   }
 
-  private async loginWithUser() {
-    let email;
-    let password;
-    if (this.isOutOfRequestContext()) {
-      const request = this.request as any;
-      email = request.props.email;
-      password = request.props.password;
-    } else {
-      const jwtToken = ExtractJwt.fromAuthHeaderAsBearerToken()(this.request);
-      const decodedJwtToken = this.jwtService.decode(jwtToken);
-      email = decodedJwtToken.credentials.email;
-      password = decodedJwtToken.credentials.password;
-    }
+  private async loginWithUser(client: SupabaseClient$) {
+    const jwtToken = ExtractJwt.fromAuthHeaderAsBearerToken()(this.request);
+    const decodedJwtToken = this.jwtService.decode(jwtToken);
 
-    await this.instance.auth.signInWithPassword({
+    const email = this.request.body.email ?? decodedJwtToken.credentials.email;
+    const password =
+      this.request.body.password ?? decodedJwtToken.credentials.password;
+
+    await client.auth.signInWithPassword({
       email,
       password,
     });
+
+    return client;
   }
 }

@@ -41,7 +41,7 @@ export class SupabaseScoringRecordsRepository
       {}
     );
 
-    const { data, error } = await this.supabaseClient.instance
+    const { data, error } = await client
       .from(this.tableName)
       .insert({
         amount: record.getRaw().amount,

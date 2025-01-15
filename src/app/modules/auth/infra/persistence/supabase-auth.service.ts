@@ -12,10 +12,12 @@ export class SupabaseAuthService implements AuthService {
   constructor(private readonly supabaseClient: SupabaseClient) {}
 
   async register(credentials: Credentials): Promise<RegisterResult> {
-    const { data, error } = await this.supabaseClient.instance.auth.signUp({
-      email: credentials.email,
-      password: credentials.password,
-    });
+    const { data, error } = await this.supabaseClient
+      .getEmptyClient()
+      .auth.signUp({
+        email: credentials.email,
+        password: credentials.password,
+      });
     if (error) {
       return {
         status: 'FAILED',
@@ -28,8 +30,9 @@ export class SupabaseAuthService implements AuthService {
   }
 
   async login(credentials: Credentials): Promise<LoginResult> {
-    const { data, error } =
-      await this.supabaseClient.instance.auth.signInWithPassword({
+    const { data, error } = await this.supabaseClient
+      .getEmptyClient()
+      .auth.signInWithPassword({
         email: credentials.email,
         password: credentials.password,
       });

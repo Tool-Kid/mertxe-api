@@ -12,8 +12,9 @@ export class SupabaseUserProfileRepository implements UserProfileRepository {
       id: profile.id,
       scoring: 1000,
     };
+    const client = await this.supabaseClient.getClient();
 
-    await this.supabaseClient.instance
+    await client
       .from('UserProfiles')
       .insert([
         { user_id: defaultProfile.id, scoring: defaultProfile.scoring },
