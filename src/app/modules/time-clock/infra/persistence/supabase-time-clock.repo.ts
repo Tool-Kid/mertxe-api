@@ -47,7 +47,7 @@ export class SupabaseTimeclockRepository implements TimeClockRepository {
       .select('*')
       .filter('clock_out_at', 'is', null);
 
-    const noSessionStarted = currentClockRecord.count === null;
+    const noSessionStarted = currentClockRecord.data.length === 0;
 
     if (noSessionStarted) {
       throw new InvalidOperationException('No session active');
