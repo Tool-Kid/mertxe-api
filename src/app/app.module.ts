@@ -8,8 +8,13 @@ import { JWTAuthGuard } from './modules/auth/infra/passport';
 import { CatchExceptionFilter } from '@common/error/catch-exception.filter';
 import { ScoringModule } from './modules/scoring/scoring.module';
 import { EventsModule } from './common/events/events.module';
+import { CqrsModule } from '@nestjs/cqrs';
 
-const THIRD_PARTY_MODULES = [SupabaseClientModule.forRoot(), EventsModule];
+const THIRD_PARTY_MODULES = [
+  SupabaseClientModule.forRoot(),
+  EventsModule,
+  CqrsModule.forRoot(),
+];
 
 const FEATURE_MODULES = [
   AuthModule,
