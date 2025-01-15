@@ -29,15 +29,34 @@ export class SupabaseClient {
       return this.instance;
     }
 
-    const jwtToken = ExtractJwt.fromAuthHeaderAsBearerToken()(this.request);
-    const decodedJwtToken = this.jwtService.decode(jwtToken);
+    await this.loginWithUser();
 
-    await this.instance.auth.signInWithPassword({
-      email: decodedJwtToken.credentials.email,
-      password: decodedJwtToken.credentials.password,
-    });
     this.authenticated = true;
 
     return this.instance;
+  }
+
+  private isOutOfRequestContext() {
+    return !this.request.body;
+  }
+
+  private async loginWithUser() {
+    let email;
+    let password;
+    if (this.isOutOfRequestContext()) {
+      const request = this.request as any;
+      email = request.props.email;
+      password = request.props.password;
+    } else {
+      const jwtToken = ExtractJwt.fromAuthHeaderAsBearerToken()(this.request);
+      const decodedJwtToken = this.jwtService.decode(jwtToken);
+      email = decodedJwtToken.credentials.email;
+      password = decodedJwtToken.credentials.password;
+    }
+
+    await this.instance.auth.signInWithPassword({
+      email,
+      password,
+    });
   }
 }

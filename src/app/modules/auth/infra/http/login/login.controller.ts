@@ -1,11 +1,11 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
-import { SupabaseClient } from '../../../common/supabase-client';
 import { JwtService } from '@nestjs/jwt';
 import { ApiTags } from '@nestjs/swagger';
 import { OPEN_API_TAG } from 'src/openapi';
 import { LoginDto, LoginResponse } from './login.dto';
-import { AuthService } from '../domain/auth.service';
-import { Public } from '../infra/http';
+import { SupabaseClient } from '@common/supabase-client';
+import { AuthService } from '../../../domain/auth.service';
+import { Public } from '../public';
 
 @Controller('auth/login')
 @ApiTags(OPEN_API_TAG.AUTH)
