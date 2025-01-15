@@ -5,6 +5,7 @@ import { LoginController } from './infra/http/login/login.controller';
 import { AuthService } from './domain/auth.service';
 import { SupabaseAuthService } from './infra/persistence/supabase-auth.service';
 import { JWTStrategy } from 'src/app/modules/auth/infra/passport';
+import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { JWTStrategy } from 'src/app/modules/auth/infra/passport';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '90d' },
     }),
+    CqrsModule,
   ],
   controllers: [LoginController, RegisterController],
   providers: [

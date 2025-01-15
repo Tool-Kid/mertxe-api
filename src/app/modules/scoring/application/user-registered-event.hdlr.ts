@@ -1,22 +1,19 @@
-import { EventHandler } from '@common/events/domain/event-handler';
-import { EVENTS } from '@common/events/events';
-import { Injectable } from '@nestjs/common';
-import { OnEvent } from '@nestjs/event-emitter';
+import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
+import { UserRegisteredEvent } from '../../auth/domain/user-registered.event';
 import { ScoringRecordsRepository } from '../domain/scoring-records.repo';
 import { RegisterScoringRecord } from '../domain/types/register';
 
-@Injectable()
-export class UserRegisteredEventHandler implements EventHandler {
+@EventsHandler(UserRegisteredEvent)
+export class UserRegisteredEventHandler
+  implements IEventHandler<UserRegisteredEvent>
+{
   constructor(
     private readonly scoringRecordsRepository: ScoringRecordsRepository
   ) {}
 
-  @OnEvent(EVENTS.USER_REGISTERED, { async: true })
-  async handle(event: any): Promise<any> {
+  async handle(event: UserRegisteredEvent) {
     const scoringRecord = new RegisterScoringRecord();
-    await this.scoringRecordsRepository.addRegisterScoringRecord(
-      event.props.id
-    );
+    await this.scoringRecordsRepository.addRegisterScoringRecord(event.userId);
     return scoringRecord.getRaw();
   }
 }

@@ -6,9 +6,9 @@ import { RegisterDto, RegisterResponse } from './register.dto';
 import { AuthService } from '../../../domain/auth.service';
 import { Public } from '..';
 import { JwtService } from '@nestjs/jwt';
-import { EventBus } from '@common/events/domain/event-bus';
 import { EVENTS } from '@common/events/events';
 import { UserRegisteredEvent } from '../../../domain/user-registered.event';
+import { EventBus } from '@nestjs/cqrs';
 
 @Controller('auth/register')
 @ApiTags(OPEN_API_TAG.AUTH)
@@ -44,18 +44,13 @@ export class RegisterController {
       .insert({ user_id: user.id })
       .select('*');
 
-    const result = await this.eventBus.emit(
-      EVENTS.USER_REGISTERED,
-      new UserRegisteredEvent({
-        id: user.id,
-        email: user.email,
-        password: dto.password,
-      })
+    const result = await this.eventBus.publish(
+      new UserRegisteredEvent(user.id)
     );
 
     await this.supabaseClient.instance
       .from('UserProfiles')
-      .update({ scoring: result.amount })
+      .update({ scoring: 1000 })
       .eq('user_id', user.id);
 
     return {
