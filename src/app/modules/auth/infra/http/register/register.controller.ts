@@ -55,7 +55,8 @@ export class RegisterController {
 
     await this.supabaseClient.instance
       .from('UserProfiles')
-      .update({ user_id: user.id, scoring: result.amount });
+      .update({ scoring: result.amount })
+      .eq('user_id', user.id);
 
     return {
       user: user,
