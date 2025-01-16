@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './modules/auth/auth.module';
-import { SupabaseClientModule } from '@common/supabase-client/supabase-client.module';
+import { SupabaseModule } from '@common/supabase/supabase.module';
 import { TimeClockModule } from './modules/time-clock/time-clock.module';
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
@@ -10,9 +10,10 @@ import { ScoringModule } from './modules/scoring/scoring.module';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventsModule } from '@common/events';
 import { ClsModule } from 'nestjs-cls';
+import { ContributionsModule } from './modules/contributions/contributions.module';
 
 const THIRD_PARTY_MODULES = [
-  SupabaseClientModule.forRoot(),
+  SupabaseModule.forRoot(),
   EventsModule.forRoot(),
   CqrsModule.forRoot({}),
   ClsModule.forRoot({
@@ -35,7 +36,7 @@ const FEATURE_MODULES = [
 ];
 
 @Module({
-  imports: [...THIRD_PARTY_MODULES, ...FEATURE_MODULES],
+  imports: [...THIRD_PARTY_MODULES, ...FEATURE_MODULES, ContributionsModule],
   providers: [
     {
       provide: APP_GUARD,

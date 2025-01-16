@@ -1,5 +1,5 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
-import { SupabaseClient } from '../../../../../common/supabase-client';
+import { SupabaseClient } from '../../../../../common/supabase';
 import { ApiTags } from '@nestjs/swagger';
 import { OPEN_API_TAG } from 'src/openapi';
 import { RegisterDto, RegisterResponse } from './register.dto';
