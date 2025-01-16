@@ -16,4 +16,5 @@ export const OPEN_API_TAG = {
   TIME_CLOCK: 'Time clock',
   USER_PROFILE: 'User Profile',
   SCORING: 'Scoring',
+  CONTRIBUTIONS: 'Contributions',
 };
