@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ScoringRecord } from '../../domain/scoring-record';
 import { ScoringRecordsRepository } from '../../domain/scoring-records.repo';
-import { SupabaseClient } from '@common/supabase-client';
+import { SupabaseClient } from '@common/supabase';
 import { ScoringRecordFactory } from '../../domain/types/factory';
 import { ScoringRecordReason } from '../../domain/scoring-record-reason';
 

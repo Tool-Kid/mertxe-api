@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@common/supabase-client';
+import { SupabaseClient } from '@common/supabase';
 import { UserProfile } from '../../domain/user-profile';
 import { UserProfileRepository } from '../../domain/user-profile.repo';
 import { Injectable } from '@nestjs/common';

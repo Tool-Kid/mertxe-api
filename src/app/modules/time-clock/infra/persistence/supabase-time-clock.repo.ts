@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@common/supabase-client';
+import { SupabaseClient } from '@common/supabase';
 import { TimeClockRecord } from '../../domain/time-clock-record';
 import { TimeClockRepository } from '../../domain/time-clock.repo';
 import { Injectable } from '@nestjs/common';

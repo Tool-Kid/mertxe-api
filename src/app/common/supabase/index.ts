@@ -1,3 +1,4 @@
+export * from './decorators';
 export * from './providers';
 export * from './supabase-client-config';
 export * from './supabase-client';
