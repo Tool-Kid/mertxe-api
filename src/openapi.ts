@@ -6,6 +6,7 @@ export function setupOpenApi(app: INestApplication) {
     .setTitle('Mertxe API')
     .setDescription('The Mertxe API description')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);

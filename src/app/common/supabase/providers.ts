@@ -7,7 +7,7 @@ export function registerRepositories(
   return repositories.map((provider) => ({
     provide: provider.provide,
     useFactory: (client: SupabaseClient) => {
-      const repositoryInstance = new provider.useClass() as any;
+      const repositoryInstance = new provider.useClass();
       repositoryInstance.client = client;
       return repositoryInstance;
     },

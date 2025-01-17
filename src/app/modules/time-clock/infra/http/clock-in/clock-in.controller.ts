@@ -1,4 +1,4 @@
-import { Controller, Post } from '@nestjs/common';
+import { Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { OPEN_API_TAG } from 'src/openapi';
 import { TimeClockResponse } from '../time-clock-record.dto';
@@ -7,8 +7,9 @@ import { execute } from '@common/cqrs';
 import { ClockInCmd } from '../../../application/clock-in/clock-in-cmd';
 import { toDto } from '@common/utils/serialization';
 import { TimeClockRecord } from '../../../domain/time-clock-record';
+import { PrivateController } from '@common/http';
 
-@Controller('clock-in')
+@PrivateController('clock-in')
 @ApiTags(OPEN_API_TAG.TIME_CLOCK)
 export class ClockInController {
   constructor(private readonly commandBus: CommandBus) {}

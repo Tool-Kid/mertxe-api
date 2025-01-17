@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { OPEN_API_TAG } from 'src/openapi';
 import { GetScoringRecordsResponse } from './get-scoring-records.dto';
@@ -7,8 +7,9 @@ import { GetScoringRecordsQry } from '../../../application/get-scoring-records/g
 import { execute } from '@common/cqrs';
 import { ScoringRecord } from '@modules/scoring/domain/scoring-record';
 import { toDto } from '@common/utils/serialization';
+import { PrivateController } from '@common/http';
 
-@Controller('scoring-records')
+@PrivateController('scoring-records')
 @ApiTags(OPEN_API_TAG.SCORING)
 export class GetScoringRecordsController {
   constructor(private readonly qryBus: QueryBus) {}

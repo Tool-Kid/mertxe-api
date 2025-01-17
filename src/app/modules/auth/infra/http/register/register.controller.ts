@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
+import { BadRequestException, Body, Post } from '@nestjs/common';
 import { SupabaseClient } from '../../../../../common/supabase';
 import { ApiTags } from '@nestjs/swagger';
 import { OPEN_API_TAG } from 'src/openapi';
@@ -8,8 +8,9 @@ import { Public } from '..';
 import { JwtService } from '@nestjs/jwt';
 import { UserRegisteredEvent } from '../../../domain/user-registered.event';
 import { EventBus } from '@common/events';
+import { PublicController } from '@common/http';
 
-@Controller('auth/register')
+@PublicController('auth/register')
 @ApiTags(OPEN_API_TAG.AUTH)
 export class RegisterController {
   constructor(

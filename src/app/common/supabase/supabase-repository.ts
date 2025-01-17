@@ -66,7 +66,7 @@ export class ISupabaseRepository<RepositoryEntity extends Entity<any>>
   private async mergeEntityWithUserContext(entity: Partial<RepositoryEntity>) {
     const userId = await this.getUserId();
     entity.set('userId').to(userId);
-    return entity as any;
+    return entity as RepositoryEntity;
   }
 
   private toDomain(
