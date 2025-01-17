@@ -12,47 +12,37 @@ export class SupabaseTimeclockRepository
   implements TimeClockRepository
 {
   async clockIn(): Promise<TimeClockRecord> {
-    const client = await this.client.getClient();
-    const record = await client
-      .from(this.tableName)
-      .select('*')
-      .filter('clock_out_at', 'is', null);
+    const recordWithNoClockOut = await this.findOne({
+      filters: [['clock_out_at', 'is', null]],
+    });
+    const allRecords = await this.findAll();
 
-    const isFirstClockIn = record.count === null;
-    const hasClockInSessionStarted = record.data.at(0);
+    const isFirstClockIn = allRecords.length === 0;
+    const hasTimeClockSessionStarted = recordWithNoClockOut !== null;
 
-    if (!isFirstClockIn || hasClockInSessionStarted) {
+    if (isFirstClockIn || hasTimeClockSessionStarted) {
       throw new InvalidOperationException('Session already active');
     }
 
     const emptyTimeRecord = new TimeClockRecord({});
-
     const entity = await this.create(emptyTimeRecord);
-
     return entity as TimeClockRecord;
   }
 
   async clockOut(): Promise<TimeClockRecord> {
-    const client = await this.client.getClient();
-    const userId = (await client.auth.getUser()).data.user.id;
-
-    const currentClockRecord = await client
-      .from(this.tableName)
-      .select('*')
-      .filter('clock_out_at', 'is', null);
-
-    const noSessionStarted = currentClockRecord.data.length === 0;
+    const currentClockRecord = await this.findOne({
+      filters: [['clock_out_at', 'is', null]],
+    });
+    const noSessionStarted = currentClockRecord === null;
 
     if (noSessionStarted) {
       throw new InvalidOperationException('No session active');
     }
 
-    const entity = new TimeClockRecord({
-      id: currentClockRecord.data[0].id,
-      clockOutAt: new Date().toISOString(),
-      userId,
-    });
-    const updated = await this.update(entity);
+    currentClockRecord.set('clockOutAt').to(new Date().toISOString());
+
+    const updated = await this.update(currentClockRecord);
+
     return updated as TimeClockRecord;
   }
 

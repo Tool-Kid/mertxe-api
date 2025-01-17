@@ -11,29 +11,19 @@ export class SupabaseUserProfileRepository
   implements UserProfileRepository
 {
   async setInitialData(profile: Partial<UserProfile>): Promise<UserProfile> {
-    const client = await this.getClient();
-
     await this.create(profile);
-    await client
-      .from('UserProfiles')
-      .insert([
-        { user_id: profile.get('id'), scoring: profile.get('scoring') },
-      ]);
-
-    await this.create(profile);
-
     return profile as UserProfile;
   }
 
   async getUserProfile(): Promise<UserProfile> {
-    const profiles = await this.findAll();
-    return profiles[0];
+    const profiles = await this.findOne();
+    return profiles;
   }
 
   async updateScoring(scoring: number): Promise<UserProfile> {
-    const profile = await this.findAll();
-    profile[0].set('scoring').to(scoring);
-    await this.update(profile[0]);
-    return profile[0];
+    const profile = await this.findOne();
+    profile.set('scoring').to(scoring);
+    await this.update(profile);
+    return profile;
   }
 }

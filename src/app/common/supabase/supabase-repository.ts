@@ -3,12 +3,47 @@ import { Type } from '@nestjs/common';
 import { toCamelCase, toSnakeCase } from '@common/utils';
 import { Entity } from 'types-ddd';
 
+type SupabaseFilterOperator =
+  | 'eq'
+  | 'neq'
+  | 'gt'
+  | 'gte'
+  | 'lt'
+  | 'lte'
+  | 'like'
+  | 'ilike'
+  | 'is'
+  | 'in'
+  | 'cs'
+  | 'cd'
+  | 'sl'
+  | 'sr'
+  | 'nxl'
+  | 'nxr'
+  | 'adj'
+  | 'ov'
+  | 'fts'
+  | 'plfts'
+  | 'phfts'
+  | 'wfts';
+
+interface SupabaseFilter {
+  column: string;
+  operator: `${'' | 'not.'}${SupabaseFilterOperator}`;
+  value: any;
+}
+
+interface SupabaseCriteria {
+  filters: [string, `${'' | 'not.'}${SupabaseFilterOperator}`, any][];
+}
+
 interface InternalISupabaseRepository<RepositoryEntity extends Entity<any>> {
   readonly client: SupabaseClient;
   readonly tableName: string;
   readonly entity: Type<RepositoryEntity>;
 
   findAll(): Promise<RepositoryEntity[]>;
+  findOne(criteria?: SupabaseCriteria): Promise<RepositoryEntity>;
   create(entity: Partial<RepositoryEntity>): Promise<Partial<RepositoryEntity>>;
   update(entity: Partial<RepositoryEntity>): Promise<Partial<RepositoryEntity>>;
 }
@@ -47,6 +82,22 @@ export class ISupabaseRepository<RepositoryEntity extends Entity<any>>
     delete raw.updated_at;
     delete raw.created_at;
     return raw;
+  }
+
+  async findOne(criteria?: SupabaseCriteria): Promise<RepositoryEntity> {
+    const client = await this.getClient();
+    const query = client.from(this.tableName).select('*');
+    if (criteria?.filters) {
+      for (const [column, operator, value] of criteria.filters) {
+        query.filter(column, operator, value);
+      }
+    }
+    const { data } = await query;
+    if (!data[0]) {
+      return null;
+    }
+    const mappedData = this.toDomain(data[0]);
+    return mappedData;
   }
 
   async findAll(): Promise<RepositoryEntity[]> {
