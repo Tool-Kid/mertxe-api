@@ -18,6 +18,6 @@ export class TimeClockScoringRecord extends ScoringRecord {
     const diffMs = clockOutDate.getTime() - clockInDate.getTime();
     const diffMinutes = diffMs / (1000 * 60);
 
-    return Math.floor(diffMinutes / 30) * 5;
+    return -Math.floor(diffMinutes / 30) * 5;
   }
 }

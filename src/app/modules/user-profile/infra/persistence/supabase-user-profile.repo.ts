@@ -1,37 +1,36 @@
-import { SupabaseClient } from '@common/supabase';
+import {
+  ISupabaseRepository,
+  SupabaseClient,
+  SupabaseRepository,
+} from '@common/supabase';
 import { UserProfile } from '../../domain/user-profile';
 import { UserProfileRepository } from '../../domain/user-profile.repo';
-import { Injectable } from '@nestjs/common';
 
-@Injectable()
-export class SupabaseUserProfileRepository implements UserProfileRepository {
-  constructor(private readonly supabaseClient: SupabaseClient) {}
-
+@SupabaseRepository({
+  table: 'UserProfiles',
+  entity: UserProfile,
+})
+export class SupabaseUserProfileRepository
+  extends ISupabaseRepository<UserProfile>
+  implements UserProfileRepository
+{
   async setInitialData(profile: Partial<UserProfile>): Promise<UserProfile> {
-    const defaultProfile: Partial<UserProfile> = {
-      id: profile.id,
-      scoring: 1000,
-    };
-    const client = await this.supabaseClient.getClient();
+    const client = await this.getClient();
 
+    await this.create(profile);
     await client
       .from('UserProfiles')
       .insert([
-        { user_id: defaultProfile.id, scoring: defaultProfile.scoring },
+        { user_id: profile.get('id'), scoring: profile.get('scoring') },
       ]);
 
-    return {
-      id: defaultProfile.id,
-      scoring: defaultProfile.scoring,
-    };
+    await this.create(profile);
+
+    return profile as UserProfile;
   }
 
   async getUserProfile(): Promise<UserProfile> {
-    const client = await this.supabaseClient.getClient();
-    const { data } = await client.from('UserProfiles').select('*');
-    return {
-      id: '',
-      scoring: data[0].scoring,
-    };
+    const profiles = await this.findAll();
+    return profiles[0];
   }
 }
