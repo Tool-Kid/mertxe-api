@@ -1,18 +1,20 @@
-import { SupabaseClient } from '@common/supabase';
+import { ISupabaseRepository, SupabaseRepository } from '@common/supabase';
 import { TimeClockRecord } from '../../domain/time-clock-record';
 import { TimeClockRepository } from '../../domain/time-clock.repo';
 import { Injectable } from '@nestjs/common';
 import { InvalidOperationException } from '@common/error';
 
 @Injectable()
-export class SupabaseTimeclockRepository implements TimeClockRepository {
-  readonly tableName = 'ClockInRecords';
-  constructor(private readonly supabaseClient: SupabaseClient) {}
-
+@SupabaseRepository({
+  table: 'ClockInRecords',
+  entity: TimeClockRecord,
+})
+export class SupabaseTimeclockRepository
+  extends ISupabaseRepository<TimeClockRecord>
+  implements TimeClockRepository
+{
   async clockIn(): Promise<TimeClockRecord> {
-    const client = await this.supabaseClient.getClient();
-    const userId = (await client.auth.getUser()).data.user.id;
-
+    const client = await this.client.getClient();
     const record = await client
       .from(this.tableName)
       .select('*')
@@ -25,21 +27,15 @@ export class SupabaseTimeclockRepository implements TimeClockRepository {
       throw new InvalidOperationException('Session already active');
     }
 
-    const { data } = await client
-      .from(this.tableName)
-      .insert({ user_id: userId })
-      .select('*');
-    const clockInRecord = data[0];
+    const emptyTimeRecord = new TimeClockRecord({});
 
-    return new TimeClockRecord({
-      id: clockInRecord.id,
-      clockInAt: clockInRecord.clock_in_at,
-      clockOutAt: clockInRecord.clock_out_at,
-    });
+    const entity = await this.create(emptyTimeRecord);
+
+    return entity as TimeClockRecord;
   }
 
   async clockOut(): Promise<TimeClockRecord> {
-    const client = await this.supabaseClient.getClient();
+    const client = await this.client.getClient();
     const userId = (await client.auth.getUser()).data.user.id;
 
     const currentClockRecord = await client
@@ -53,31 +49,17 @@ export class SupabaseTimeclockRepository implements TimeClockRepository {
       throw new InvalidOperationException('No session active');
     }
 
-    const { data } = await client
-      .from(this.tableName)
-      .update({ clock_out_at: new Date(), user_id: userId })
-      .eq('id', currentClockRecord.data[0].id)
-      .select('*');
-    const clockInRecord = data[0];
-
-    return new TimeClockRecord({
-      id: clockInRecord.id,
-      clockInAt: clockInRecord.clock_in_at,
-      clockOutAt: clockInRecord.clock_out_at,
+    const entity = new TimeClockRecord({
+      id: currentClockRecord.data[0].id,
+      clockOutAt: new Date().toISOString(),
+      userId,
     });
+    const updated = await this.update(entity);
+    return updated as TimeClockRecord;
   }
 
   async getTimeClockRecords(): Promise<TimeClockRecord[]> {
-    const client = await this.supabaseClient.getClient();
-    const clockRecords = await client.from(this.tableName).select('*');
-
-    return clockRecords.data.map(
-      (record) =>
-        new TimeClockRecord({
-          id: record.id,
-          clockInAt: record.clock_in_at,
-          clockOutAt: record.clock_out_at,
-        })
-    );
+    const clockRecords = await this.findAll();
+    return clockRecords;
   }
 }

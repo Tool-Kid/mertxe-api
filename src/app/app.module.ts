@@ -5,12 +5,12 @@ import { TimeClockModule } from './modules/time-clock/time-clock.module';
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { JWTAuthGuard } from './modules/auth/infra/passport';
-import { CatchExceptionFilter } from '@common/error/catch-exception.filter';
 import { ScoringModule } from './modules/scoring/scoring.module';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventsModule } from '@common/events';
 import { ClsModule } from 'nestjs-cls';
 import { ContributionsModule } from './modules/contributions/contributions.module';
+import { CatchExceptionFilter } from '@common/error';
 
 const THIRD_PARTY_MODULES = [
   SupabaseModule.forRoot(),

@@ -5,7 +5,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { OPEN_API_TAG } from 'src/openapi';
 import { GetContributionsQryResponse } from '../../application/get-contributions/get-contributions.qry.hdler';
 import { typedAsync } from '@common/utils';
-import { mapToRaw } from '@common/ddd';
+import { mapArrayToRaw } from '@common/ddd';
 import { GetContributionsQry } from '../../application/get-contributions/get-contributions.qry';
 import { execute } from '@common/cqrs';
 
@@ -21,7 +21,7 @@ export class GetContributionsController {
       payload: new GetContributionsQry(),
     });
     return {
-      entries: mapToRaw(result.entries),
+      entries: mapArrayToRaw(result.entries),
     };
   }
 }

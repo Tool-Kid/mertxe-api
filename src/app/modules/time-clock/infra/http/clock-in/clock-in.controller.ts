@@ -3,6 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { OPEN_API_TAG } from 'src/openapi';
 import { TimeClockRepository } from '../../../domain/time-clock.repo';
 import { TimeClockResponse } from '../time-clock-record.dto';
+import { mapArrayToRaw, mapToRaw } from '@common/ddd';
 
 @Controller('clock-in')
 @ApiTags(OPEN_API_TAG.TIME_CLOCK)
@@ -11,7 +12,7 @@ export class ClockInController {
 
   @Post()
   async clockIn(): Promise<TimeClockResponse> {
-    const result = await this.timeClockRepository.clockIn();
-    return result;
+    const timeClockRecord = await this.timeClockRepository.clockIn();
+    return mapToRaw(timeClockRecord) as any;
   }
 }

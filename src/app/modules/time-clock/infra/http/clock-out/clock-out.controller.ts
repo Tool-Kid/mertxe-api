@@ -13,6 +13,6 @@ export class ClockOutController {
   @Post()
   async clockIn(): Promise<TimeClockResponse> {
     const result = await this.commandBus.execute(new ClockOutCmd());
-    return result;
+    return result.getRaw();
   }
 }

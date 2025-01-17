@@ -1,17 +1,10 @@
-interface ClockInRecordProps {
-  id: number;
-  clockInAt: string;
-  clockOutAt: string;
+import { Aggregate } from 'types-ddd';
+
+interface TimeClockRecordProps {
+  id?: number;
+  userId?: string;
+  clockInAt?: string;
+  clockOutAt?: string;
 }
 
-export class TimeClockRecord implements ClockInRecordProps {
-  id: number;
-  clockInAt: string;
-  clockOutAt: string;
-
-  constructor(props: ClockInRecordProps) {
-    this.id = props.id;
-    this.clockInAt = props.clockInAt;
-    this.clockOutAt = props.clockOutAt;
-  }
-}
+export class TimeClockRecord extends Aggregate<TimeClockRecordProps> {}
