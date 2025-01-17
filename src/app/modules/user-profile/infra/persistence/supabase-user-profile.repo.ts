@@ -1,10 +1,7 @@
-import {
-  ISupabaseRepository,
-  SupabaseClient,
-  SupabaseRepository,
-} from '@common/supabase';
+import { ISupabaseRepository, SupabaseRepository } from '@common/supabase';
 import { UserProfile } from '../../domain/user-profile';
 import { UserProfileRepository } from '../../domain/user-profile.repo';
+import { profile } from 'console';
 
 @SupabaseRepository({
   table: 'UserProfiles',
@@ -32,5 +29,12 @@ export class SupabaseUserProfileRepository
   async getUserProfile(): Promise<UserProfile> {
     const profiles = await this.findAll();
     return profiles[0];
+  }
+
+  async updateScoring(scoring: number): Promise<UserProfile> {
+    const profile = await this.findAll();
+    profile[0].set('scoring').to(scoring);
+    await this.update(profile[0]);
+    return profile[0];
   }
 }

@@ -14,7 +14,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@common/*": ["src/app/common/*"]
+      "@common/*": ["src/app/common/*"],
+      "@modules/*": ["src/app/modules/*"]
     },
     "esModuleInterop": true
   },

@@ -15,7 +15,7 @@ import { CatchExceptionFilter } from '@common/error';
 const THIRD_PARTY_MODULES = [
   SupabaseModule.forRoot(),
   EventsModule.forRoot(),
-  CqrsModule.forRoot({}),
+  CqrsModule.forRoot(),
   ClsModule.forRoot({
     middleware: {
       mount: true,
