@@ -1,10 +1,8 @@
 import { ISupabaseRepository, SupabaseRepository } from '@common/supabase';
 import { TimeClockRecord } from '../../domain/time-clock-record';
 import { TimeClockRepository } from '../../domain/time-clock.repo';
-import { Injectable } from '@nestjs/common';
 import { InvalidOperationException } from '@common/error';
 
-@Injectable()
 @SupabaseRepository({
   table: 'ClockInRecords',
   entity: TimeClockRecord,

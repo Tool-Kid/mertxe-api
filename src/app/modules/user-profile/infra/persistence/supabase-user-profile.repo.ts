@@ -1,7 +1,6 @@
 import { ISupabaseRepository, SupabaseRepository } from '@common/supabase';
 import { UserProfile } from '../../domain/user-profile';
 import { UserProfileRepository } from '../../domain/user-profile.repo';
-import { profile } from 'console';
 
 @SupabaseRepository({
   table: 'UserProfiles',
