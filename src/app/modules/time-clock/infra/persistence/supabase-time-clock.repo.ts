@@ -4,7 +4,7 @@ import { TimeClockRepository } from '../../domain/time-clock.repo';
 import { InvalidOperationException } from '@common/error';
 
 @SupabaseRepository({
-  table: 'ClockInRecords',
+  table: 'TimeClockRecords',
   entity: TimeClockRecord,
 })
 export class SupabaseTimeclockRepository
