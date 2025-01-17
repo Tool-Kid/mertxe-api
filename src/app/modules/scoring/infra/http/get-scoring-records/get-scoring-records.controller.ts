@@ -4,6 +4,9 @@ import { OPEN_API_TAG } from 'src/openapi';
 import { GetScoringRecordsResponse } from './get-scoring-records.dto';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetScoringRecordsQry } from '../../../application/get-scoring-records/get-scoring-redords.qry';
+import { execute } from '@common/cqrs';
+import { ScoringRecord } from '@modules/scoring/domain/scoring-record';
+import { toDto } from '@common/utils/serialization';
 
 @Controller('scoring-records')
 @ApiTags(OPEN_API_TAG.SCORING)
@@ -12,13 +15,16 @@ export class GetScoringRecordsController {
 
   @Get()
   async clockIn(): Promise<GetScoringRecordsResponse> {
-    const result = await this.qryBus.execute(new GetScoringRecordsQry());
-    return {
-      entries: result.map((entry) => ({
-        createdAt: entry.get('createdAt'),
-        amount: entry.get('amount'),
-        reason: entry.get('reason'),
+    const result = await execute<ScoringRecord[]>({
+      bus: this.qryBus,
+      payload: new GetScoringRecordsQry(),
+    });
+    return toDto(GetScoringRecordsResponse, {
+      entries: result.map((record) => ({
+        amount: record.get('amount'),
+        reason: record.get('reason'),
+        createdAt: record.get('createdAt'),
       })),
-    };
+    });
   }
 }

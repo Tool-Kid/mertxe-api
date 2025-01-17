@@ -5,8 +5,8 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { SupabaseScoringRecordsRepository } from './infra/persistence/supabase-scoring-records.repo';
 import { GetScoringRecordsQryHdlr } from './application/get-scoring-records/get-scoring-records.qry.hdlr';
 import { GetScoringRecordsController } from './infra/http/get-scoring-records/get-scoring-records.controller';
-import { ClsModule } from 'nestjs-cls';
 import { TimeClockSessionFinishedEventHandler } from './application/time-clock-session-finished/time-clock-session-finised-event.hdlr';
+import { SupabaseModule } from '@common/supabase';
 
 const EVENT_HANDLERS = [
   UserRegisteredEventHandler,
@@ -15,15 +15,18 @@ const EVENT_HANDLERS = [
 const QUERY_HANDLERS = [GetScoringRecordsQryHdlr];
 
 @Module({
-  imports: [CqrsModule, ClsModule],
-  controllers: [GetScoringRecordsController],
-  providers: [
-    ...EVENT_HANDLERS,
-    ...QUERY_HANDLERS,
-    {
-      provide: ScoringRecordsRepository,
-      useClass: SupabaseScoringRecordsRepository,
-    },
+  imports: [
+    CqrsModule,
+    SupabaseModule.forFeature({
+      repositories: [
+        {
+          provide: ScoringRecordsRepository,
+          useClass: SupabaseScoringRecordsRepository,
+        },
+      ],
+    }),
   ],
+  controllers: [GetScoringRecordsController],
+  providers: [...EVENT_HANDLERS, ...QUERY_HANDLERS],
 })
 export class ScoringModule {}
