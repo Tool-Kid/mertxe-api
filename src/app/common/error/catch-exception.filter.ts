@@ -6,6 +6,7 @@ import {
   Type,
   BadRequestException,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 import { ExceptionType } from './exception-type';
@@ -13,6 +14,7 @@ import { Exception } from './exception';
 
 const EXCEPTIONS_MAP = new Map<ExceptionType, Type<HttpException>>([
   [ExceptionType.INVALID_OPERATION, BadRequestException],
+  [ExceptionType.RESOURCE_NOT_FOUND, NotFoundException],
 ]);
 
 @Catch(Exception)
