@@ -93,7 +93,7 @@ export class ISupabaseRepository<RepositoryEntity extends Entity<any>>
       }
     }
     const { data } = await query;
-    if (!data[0]) {
+    if (!data?.[0]) {
       return null;
     }
     const mappedData = this.toDomain(data[0]);
