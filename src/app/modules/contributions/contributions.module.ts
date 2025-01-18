@@ -7,9 +7,11 @@ import { GetContributionsController } from './infra/http/get-contributions/get-c
 import { CqrsModule } from '@nestjs/cqrs';
 import { AddContributionCmdHdlr } from './application/add-contribution/add-contributions.cmd.hdlr';
 import { AddContributionController } from './infra/http/add-contribution/add-contribution.controller';
+import { ApproveContributionController } from './infra/http/approve-contribution/approve-contribution.controller';
+import { ApproveContributionCmdHdlr } from './application/approve-contribution/approve-contribution.cmd.hdlr';
 
 const QUERY_HANDLERS = [GetContributionsQryHdler];
-const COMMAND_HANDLERS = [AddContributionCmdHdlr];
+const COMMAND_HANDLERS = [AddContributionCmdHdlr, ApproveContributionCmdHdlr];
 
 @Module({
   imports: [
@@ -23,7 +25,11 @@ const COMMAND_HANDLERS = [AddContributionCmdHdlr];
       ],
     }),
   ],
-  controllers: [GetContributionsController, AddContributionController],
+  controllers: [
+    GetContributionsController,
+    AddContributionController,
+    ApproveContributionController,
+  ],
   providers: [...QUERY_HANDLERS, ...COMMAND_HANDLERS],
 })
 export class ContributionsModule {}

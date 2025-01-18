@@ -1,6 +1,7 @@
 import { ContributionType } from './contribution-type';
 import { Aggregate } from 'types-ddd';
 import { ContributionFactory } from './factory';
+import { ContributionStatus } from './contribution-status';
 
 export interface ContributionProps {
   id?: number;
@@ -8,6 +9,7 @@ export interface ContributionProps {
   points?: number;
   type: ContributionType;
   comments: string;
+  status: ContributionStatus;
 }
 
 export class Contribution extends Aggregate<ContributionProps> {
@@ -16,5 +18,9 @@ export class Contribution extends Aggregate<ContributionProps> {
     data: any
   ): Promise<Contribution> {
     return await ContributionFactory.build(type, data);
+  }
+
+  approve() {
+    this.set('status').to(ContributionStatus.ACCEPTED);
   }
 }

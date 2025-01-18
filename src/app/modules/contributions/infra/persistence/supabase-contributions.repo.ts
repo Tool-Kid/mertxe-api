@@ -14,10 +14,20 @@ export class SupabaseContributionsRepository
     return await this.findAll();
   }
 
+  async getContributionById(id: number): Promise<Contribution> {
+    const contribution = await this.findOne({ filters: [['id', 'is', id]] });
+    return contribution;
+  }
+
   async addContribution(
     contribution: Partial<Contribution>
   ): Promise<Partial<Contribution>> {
     const added = await this.create(contribution);
     return added;
+  }
+
+  async update(contribution: Contribution): Promise<Contribution> {
+    const updated = await this.update(contribution);
+    return updated;
   }
 }

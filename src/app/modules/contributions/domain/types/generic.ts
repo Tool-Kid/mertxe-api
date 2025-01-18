@@ -1,4 +1,5 @@
 import { Contribution } from '../contribution';
+import { ContributionStatus } from '../contribution-status';
 import { ContributionType } from '../contribution-type';
 
 export class GenericContribution extends Contribution {
@@ -6,6 +7,7 @@ export class GenericContribution extends Contribution {
     super({
       type,
       comments,
+      status: ContributionStatus.PENDING,
     });
   }
 }
