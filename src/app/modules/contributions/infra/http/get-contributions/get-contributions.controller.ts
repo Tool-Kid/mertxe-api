@@ -1,22 +1,23 @@
 import { Get } from '@nestjs/common';
 import { GetContributionsResponse } from './get-contributions.dto';
 import { QueryBus } from '@nestjs/cqrs';
-import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { GetContributionsQryResponse } from '../../../application/get-contributions/get-contributions.qry.hdler';
-import { mapArrayToRaw } from '@common/ddd';
 import { GetContributionsQry } from '../../../application/get-contributions/get-contributions.qry';
 import { execute } from '@common/cqrs';
-import { PrivateController } from '@common/http';
+import { Controller, IController, HandleOperation } from '@common/http';
 import { toDto } from '@common/utils/serialization';
+import { ApiGroup, ContributionsOperationName } from 'src/api-spec';
 
-@PrivateController('contributions')
-@ApiTags(OPEN_API_TAG.CONTRIBUTIONS)
-export class GetContributionsController {
+@Controller({
+  group: ApiGroup.CONTRIBUTIONS,
+  operation: ContributionsOperationName.GET_CONTRIBUTIONS,
+})
+export class GetContributionsController implements IController {
   constructor(private readonly queryBus: QueryBus) {}
 
+  @HandleOperation()
   @Get()
-  async getContributions(): Promise<GetContributionsResponse> {
+  async handle(): Promise<GetContributionsResponse> {
     const result = await execute<GetContributionsQryResponse>({
       bus: this.queryBus,
       payload: new GetContributionsQry(),

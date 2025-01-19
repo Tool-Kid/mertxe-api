@@ -1,5 +1,5 @@
-import { OperationName } from '../operation-name';
-import { OperationType } from '../operation-type';
+import { OperationName } from './operation-name';
+import { OperationType } from './operation-type';
 import { Role } from './role';
 
 export interface ApiOperation {

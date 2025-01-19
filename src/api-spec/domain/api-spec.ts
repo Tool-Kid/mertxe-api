@@ -21,7 +21,7 @@ export function getOperation(
   groupName: ApiGroup,
   operationName: OperationName
 ): ApiOperation {
-  const apiGroup = API_SPEC.groups.find((group) => group.name === group.name);
+  const apiGroup = API_SPEC.groups.find((group) => group.name === groupName);
   if (!apiGroup) {
     throw new Error(`No ApiGroup find for ${groupName}`);
   }

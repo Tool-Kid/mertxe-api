@@ -1,21 +1,21 @@
-import { Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { GetScoringRecordsResponse } from './get-scoring-records.dto';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetScoringRecordsQry } from '../../../application/get-scoring-records/get-scoring-redords.qry';
 import { execute } from '@common/cqrs';
 import { ScoringRecord } from '@modules/scoring/domain/scoring-record';
 import { toDto } from '@common/utils/serialization';
-import { PrivateController } from '@common/http';
+import { Controller, IController, HandleOperation } from '@common/http';
+import { ApiGroup, ScoringOperationName } from 'src/api-spec';
 
-@PrivateController('scoring-records')
-@ApiTags(OPEN_API_TAG.SCORING)
-export class GetScoringRecordsController {
+@Controller({
+  group: ApiGroup.SCORING,
+  operation: ScoringOperationName.GET_SCORING_RECORDS,
+})
+export class GetScoringRecordsController implements IController {
   constructor(private readonly qryBus: QueryBus) {}
 
-  @Get()
-  async clockIn(): Promise<GetScoringRecordsResponse> {
+  @HandleOperation()
+  async handle(): Promise<GetScoringRecordsResponse> {
     const result = await execute<ScoringRecord[]>({
       bus: this.qryBus,
       payload: new GetScoringRecordsQry(),

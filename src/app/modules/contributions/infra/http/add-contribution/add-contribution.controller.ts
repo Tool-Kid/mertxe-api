@@ -1,24 +1,25 @@
-import { PrivateController } from '@common/http';
 import { AddContributionCmd } from '@modules/contributions/application/add-contribution/add-contribution.cmd';
 import { Contribution } from '@modules/contributions/domain/contribution';
-import { Body, Post } from '@nestjs/common';
+import { Body } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import {
   AddContributionDto,
   AddContributionResponse,
 } from './add-contribution.dto';
 import { toDto } from '@common/utils/serialization';
 import { execute } from '@common/cqrs';
+import { Controller, HandleOperation } from '@common/http';
+import { ApiGroup, ContributionsOperationName } from 'src/api-spec';
 
-@PrivateController('contributions')
-@ApiTags(OPEN_API_TAG.CONTRIBUTIONS)
+@Controller({
+  group: ApiGroup.CONTRIBUTIONS,
+  operation: ContributionsOperationName.ADD_CONTRIBUTION,
+})
 export class AddContributionController {
   constructor(private readonly commandBus: CommandBus) {}
 
-  @Post()
-  async addContribution(
+  @HandleOperation()
+  async handle(
     @Body() dto: AddContributionDto
   ): Promise<AddContributionResponse> {
     const contribution = await execute<Contribution>({

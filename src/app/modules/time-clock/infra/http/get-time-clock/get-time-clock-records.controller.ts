@@ -1,18 +1,18 @@
-import { Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { TimeClockRepository } from '../../../domain/time-clock.repo';
 import { TimeClockResponse } from '../time-clock-record.dto';
-import { PrivateController } from '@common/http';
+import { Controller, IController, HandleOperation } from '@common/http';
 import { toDto } from '@common/utils/serialization';
+import { ApiGroup, TimeClockOperationName } from 'src/api-spec';
 
-@PrivateController('time-clock-records')
-@ApiTags(OPEN_API_TAG.TIME_CLOCK)
-export class GetTimeClockRecordsController {
+@Controller({
+  group: ApiGroup.TIME_CLOCK,
+  operation: TimeClockOperationName.GET_TIME_CLOCK_RECORDS,
+})
+export class GetTimeClockRecordsController implements IController {
   constructor(private readonly timeClockRepository: TimeClockRepository) {}
 
-  @Get()
-  async findTimeClockRecords(): Promise<TimeClockResponse[]> {
+  @HandleOperation()
+  async handle(): Promise<TimeClockResponse[]> {
     const timeClockRecords =
       await this.timeClockRepository.getTimeClockRecords();
     return timeClockRecords.map((record) =>

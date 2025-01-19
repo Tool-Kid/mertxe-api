@@ -1,25 +1,24 @@
-import { BadRequestException, Body, Post } from '@nestjs/common';
+import { BadRequestException, Body } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { LoginDto, LoginResponse } from './login.dto';
 import { SupabaseClient } from '@common/supabase';
 import { AuthService } from '../../../domain/auth.service';
-import { Public } from '../public';
-import { PublicController } from '@common/http';
+import { Controller, IController, HandleOperation } from '@common/http';
+import { ApiGroup, AuthOperationName } from 'src/api-spec';
 
-@PublicController('auth/login')
-@ApiTags(OPEN_API_TAG.AUTH)
-export class LoginController {
+@Controller({
+  group: ApiGroup.AUTH,
+  operation: AuthOperationName.LOGIN,
+})
+export class LoginController implements IController {
   constructor(
     private readonly supabaseClient: SupabaseClient,
     private readonly jwtService: JwtService,
     private readonly authService: AuthService
   ) {}
 
-  @Post()
-  @Public()
-  async login(@Body() dto: LoginDto): Promise<LoginResponse> {
+  @HandleOperation()
+  async handle(@Body() dto: LoginDto): Promise<LoginResponse> {
     const { status, user } = await this.authService.login({
       email: dto.email,
       password: dto.password,

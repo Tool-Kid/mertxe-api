@@ -1,18 +1,18 @@
-import { BadRequestException, Body, Post } from '@nestjs/common';
+import { BadRequestException, Body } from '@nestjs/common';
 import { SupabaseClient } from '../../../../../common/supabase';
-import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { RegisterDto, RegisterResponse } from './register.dto';
 import { AuthService } from '../../../domain/auth.service';
-import { Public } from '..';
 import { JwtService } from '@nestjs/jwt';
 import { UserRegisteredEvent } from '../../../domain/user-registered.event';
 import { EventBus } from '@common/events';
-import { PublicController } from '@common/http';
+import { Controller, IController, HandleOperation } from '@common/http';
+import { ApiGroup, AuthOperationName } from 'src/api-spec';
 
-@PublicController('auth/register')
-@ApiTags(OPEN_API_TAG.AUTH)
-export class RegisterController {
+@Controller({
+  group: ApiGroup.AUTH,
+  operation: AuthOperationName.REGISTER,
+})
+export class RegisterController implements IController {
   constructor(
     private readonly supabaseClient: SupabaseClient,
     private readonly authService: AuthService,
@@ -20,9 +20,8 @@ export class RegisterController {
     private readonly eventBus: EventBus
   ) {}
 
-  @Post()
-  @Public()
-  async register(@Body() dto: RegisterDto): Promise<RegisterResponse> {
+  @HandleOperation()
+  async handle(@Body() dto: RegisterDto): Promise<RegisterResponse> {
     const { user, status } = await this.authService.register({
       email: dto.email,
       password: dto.password,

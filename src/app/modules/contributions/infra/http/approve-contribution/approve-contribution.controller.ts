@@ -1,9 +1,7 @@
-import { AdminUseCaseOperation, PrivateController } from '@common/http';
+import { Controller, IController, HandleOperation } from '@common/http';
 import { Contribution } from '@modules/contributions/domain/contribution';
-import { Body, Param, Patch } from '@nestjs/common';
+import { Body, Param } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { toDto } from '@common/utils/serialization';
 import { execute } from '@common/cqrs';
 import {
@@ -11,18 +9,17 @@ import {
   ApproveContributionResponse,
 } from './approve-contribution.dto';
 import { ApproveContributionCmd } from '@modules/contributions/application/approve-contribution/approve-contribution.cmd';
+import { ApiGroup, ContributionsOperationName } from 'src/api-spec';
 
-@PrivateController('contributions/:id/approve')
-@ApiTags(OPEN_API_TAG.CONTRIBUTIONS)
-export class ApproveContributionController {
+@Controller({
+  group: ApiGroup.CONTRIBUTIONS,
+  operation: ContributionsOperationName.APPROVE_CONTRIBUTION,
+})
+export class ApproveContributionController implements IController {
   constructor(private readonly commandBus: CommandBus) {}
 
-  @Patch()
-  @AdminUseCaseOperation({
-    title: 'Approve a contribution',
-    description: 'Approves a user contribution with its points value',
-  })
-  async approveContribution(
+  @HandleOperation()
+  async handle(
     @Param('id') id: number,
     @Body() dto: ApproveContributionDto
   ): Promise<ApproveContributionResponse> {
