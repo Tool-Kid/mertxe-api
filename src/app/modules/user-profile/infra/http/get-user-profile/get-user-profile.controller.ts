@@ -1,6 +1,6 @@
 import { Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/openapi';
+import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { GetUserProfileResponse } from './user-profile.dto';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetUserProfileQry } from '../../../application/get-user-profile/get-user-profile.qry';

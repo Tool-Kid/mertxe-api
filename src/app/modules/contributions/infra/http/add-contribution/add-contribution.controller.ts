@@ -4,7 +4,7 @@ import { Contribution } from '@modules/contributions/domain/contribution';
 import { Body, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/openapi';
+import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import {
   AddContributionDto,
   AddContributionResponse,

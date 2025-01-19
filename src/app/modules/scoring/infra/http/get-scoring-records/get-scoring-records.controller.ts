@@ -1,6 +1,6 @@
 import { Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/openapi';
+import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { GetScoringRecordsResponse } from './get-scoring-records.dto';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetScoringRecordsQry } from '../../../application/get-scoring-records/get-scoring-redords.qry';

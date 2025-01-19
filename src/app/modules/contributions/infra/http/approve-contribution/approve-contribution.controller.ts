@@ -3,7 +3,7 @@ import { Contribution } from '@modules/contributions/domain/contribution';
 import { Body, Param, Patch } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/openapi';
+import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { toDto } from '@common/utils/serialization';
 import { execute } from '@common/cqrs';
 import {

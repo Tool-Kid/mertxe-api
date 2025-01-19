@@ -2,7 +2,7 @@ import { Get } from '@nestjs/common';
 import { GetContributionsResponse } from './get-contributions.dto';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/openapi';
+import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { GetContributionsQryResponse } from '../../../application/get-contributions/get-contributions.qry.hdler';
 import { mapArrayToRaw } from '@common/ddd';
 import { GetContributionsQry } from '../../../application/get-contributions/get-contributions.qry';

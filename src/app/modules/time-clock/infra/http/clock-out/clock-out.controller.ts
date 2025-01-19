@@ -1,6 +1,6 @@
 import { Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/openapi';
+import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { TimeClockResponse } from '../time-clock-record.dto';
 import { CommandBus } from '@nestjs/cqrs';
 import { ClockOutCmd } from '../../../application/clock-out/clock-out.cmd';

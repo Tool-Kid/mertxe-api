@@ -1,7 +1,7 @@
 import { BadRequestException, Body, Post } from '@nestjs/common';
 import { SupabaseClient } from '../../../../../common/supabase';
 import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/openapi';
+import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { RegisterDto, RegisterResponse } from './register.dto';
 import { AuthService } from '../../../domain/auth.service';
 import { Public } from '..';

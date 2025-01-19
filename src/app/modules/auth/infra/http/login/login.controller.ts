@@ -1,7 +1,7 @@
 import { BadRequestException, Body, Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/openapi';
+import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { LoginDto, LoginResponse } from './login.dto';
 import { SupabaseClient } from '@common/supabase';
 import { AuthService } from '../../../domain/auth.service';

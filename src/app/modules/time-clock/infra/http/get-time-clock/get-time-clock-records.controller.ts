@@ -1,6 +1,6 @@
 import { Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { OPEN_API_TAG } from 'src/openapi';
+import { OPEN_API_TAG } from 'src/api-spec/infra/openapi';
 import { TimeClockRepository } from '../../../domain/time-clock.repo';
 import { TimeClockResponse } from '../time-clock-record.dto';
 import { PrivateController } from '@common/http';

@@ -1,10 +1,12 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { API_SPEC } from '../domain/api-spec';
 
 export function setupOpenApi(app: INestApplication) {
+  const { name, description } = API_SPEC;
   const config = new DocumentBuilder()
-    .setTitle('Mertxe API')
-    .setDescription('The Mertxe API description')
+    .setTitle(name)
+    .setDescription(description)
     .setVersion('1.0')
     .addBearerAuth()
     .build();
