@@ -59,8 +59,10 @@ export const Controller = (props: ControllerProps) => {
       ApiBearerAuth()(constructor);
     }
     if (isPublic) {
-      SetMetadata('isPublic', true);
+      SetMetadata('isPublic', true)(constructor);
     }
+    SetMetadata('roles', operation.roles)(constructor);
+    
 
     const useCaseOperationProps: UseCaseOperationProps = {
       title: operation.name,

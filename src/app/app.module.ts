@@ -11,6 +11,7 @@ import { EventsModule } from '@common/events';
 import { ClsModule } from 'nestjs-cls';
 import { ContributionsModule } from './modules/contributions/contributions.module';
 import { CatchExceptionFilter } from '@common/error';
+import { RolesGuard } from '@modules/auth/infra/passport/jwt/roles.guard';
 
 const THIRD_PARTY_MODULES = [
   SupabaseModule.forRoot(),
@@ -41,6 +42,10 @@ const FEATURE_MODULES = [
     {
       provide: APP_GUARD,
       useClass: JWTAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
     {
       provide: APP_FILTER,

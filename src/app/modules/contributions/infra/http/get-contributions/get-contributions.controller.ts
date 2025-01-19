@@ -1,4 +1,3 @@
-import { Get } from '@nestjs/common';
 import { GetContributionsResponse } from './get-contributions.dto';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetContributionsQryResponse } from '../../../application/get-contributions/get-contributions.qry.hdler';
@@ -16,7 +15,6 @@ export class GetContributionsController implements IController {
   constructor(private readonly queryBus: QueryBus) {}
 
   @HandleOperation()
-  @Get()
   async handle(): Promise<GetContributionsResponse> {
     const result = await execute<GetContributionsQryResponse>({
       bus: this.queryBus,

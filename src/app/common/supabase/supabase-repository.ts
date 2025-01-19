@@ -103,7 +103,8 @@ export class ISupabaseRepository<RepositoryEntity extends Entity<any>>
   async findAll(): Promise<RepositoryEntity[]> {
     const client = await this.getClient();
     const { data } = await client.from(this.tableName).select('*');
-    const mappedData = data.map((entry) => this.toDomain(entry));
+    const entries = data ?? [];
+    const mappedData = entries.map((entry) => this.toDomain(entry));
     return mappedData;
   }
 

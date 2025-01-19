@@ -36,6 +36,12 @@ export function getOperation(
   return operation;
 }
 
+function path(group: ApiGroup, path: string) {
+  const normalizedGroup = group.toLowerCase().replace(' ', '-');
+  const normalizedPath = `${normalizedGroup}/${path}`;
+  return path;
+}
+
 export const API_SPEC: ApiSpec = {
   name: 'Mertxe API',
   description: 'The Mertxe API description',
@@ -48,14 +54,14 @@ export const API_SPEC: ApiSpec = {
           description: 'Register a new user with system',
           type: OperationType.CREATE,
           roles: [Role.ANY],
-          path: 'register',
+          path: path(ApiGroup.AUTH, 'auth/register'),
         },
         {
           name: AuthOperationName.LOGIN,
           description: 'Authenticate user with system',
           type: OperationType.CREATE,
           roles: [Role.ANY],
-          path: 'login',
+          path: path(ApiGroup.AUTH, 'auth/login'),
         },
       ],
     },
@@ -67,7 +73,7 @@ export const API_SPEC: ApiSpec = {
           description: 'Get the user profile information',
           type: OperationType.RETRIEVE,
           roles: [Role.USER],
-          path: 'user-profile',
+          path: path(ApiGroup.USER_PROFILE, 'user-profile'),
         },
       ],
     },
@@ -79,14 +85,14 @@ export const API_SPEC: ApiSpec = {
           description: 'Retrieve all time-clock records for user',
           type: OperationType.RETRIEVE,
           roles: [Role.USER],
-          path: 'time-clok-records',
+          path: path(ApiGroup.TIME_CLOCK, 'time-clock-records'),
         },
         {
           name: TimeClockOperationName.CLOCK_IN,
           description: 'Clock in with system. Time starts until you clock out.',
           type: OperationType.CREATE,
           roles: [Role.USER],
-          path: 'clock-in',
+          path: path(ApiGroup.TIME_CLOCK, 'clock-in'),
         },
         {
           name: TimeClockOperationName.CLOCK_OUT,
@@ -94,7 +100,7 @@ export const API_SPEC: ApiSpec = {
             'Clock out with system. A new time clock record will be stored and points will be computed',
           type: OperationType.CREATE,
           roles: [Role.USER],
-          path: 'clock-out',
+          path: path(ApiGroup.TIME_CLOCK, 'clock-out'),
         },
       ],
     },
@@ -106,7 +112,7 @@ export const API_SPEC: ApiSpec = {
           description: 'Retrieve all Scoring records',
           type: OperationType.RETRIEVE,
           roles: [Role.USER],
-          path: 'scoring-records',
+          path: path(ApiGroup.SCORING, 'scoring-records'),
         },
       ],
     },
@@ -118,7 +124,7 @@ export const API_SPEC: ApiSpec = {
           description: 'Retrieves a contributions for user',
           type: OperationType.RETRIEVE,
           roles: [Role.USER],
-          path: 'contributions',
+          path: path(ApiGroup.CONTRIBUTIONS, 'contributions'),
         },
         {
           name: ContributionsOperationName.ADD_CONTRIBUTION,
@@ -126,14 +132,14 @@ export const API_SPEC: ApiSpec = {
             'Create a new Contribution. This contribution requires Admin approval',
           type: OperationType.CREATE,
           roles: [Role.USER],
-          path: 'contributions',
+          path: path(ApiGroup.CONTRIBUTIONS, 'contributions'),
         },
         {
           name: ContributionsOperationName.APPROVE_CONTRIBUTION,
           description: 'Approves a user contribution',
           type: OperationType.UPDATE,
           roles: [Role.ADMIN],
-          path: 'contributions/approve',
+          path: path(ApiGroup.CONTRIBUTIONS, 'contributions/approve'),
         },
       ],
     },
