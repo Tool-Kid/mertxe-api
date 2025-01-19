@@ -20,7 +20,7 @@ export class SupabaseTimeclockRepository
     const isFirstClockIn = allRecords.length === 0;
     const hasTimeClockSessionStarted = recordWithNoClockOut !== null;
 
-    if (!isFirstClockIn || hasTimeClockSessionStarted) {
+    if (!isFirstClockIn && hasTimeClockSessionStarted) {
       throw new InvalidOperationException('Session already active');
     }
 
