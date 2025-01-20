@@ -19,8 +19,8 @@ export class TimeClockSessionFinishedEventHandler
     const record = await TimeClockScoringRecord.createForReason(
       ScoringRecordReason.TIME_CLOCK,
       {
-        clockInAt: event.clockInAt,
-        clockOutAt: event.clockOutAt,
+        clockInAt: event.data.clockInAt,
+        clockOutAt: event.data.clockOutAt,
       }
     );
     const scoringRecord = await this.scoringRecordsRepository.addScoringRecord(

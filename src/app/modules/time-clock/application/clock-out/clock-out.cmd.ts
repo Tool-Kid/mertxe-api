@@ -19,10 +19,10 @@ export class ClockOutCmdHdlr
     const result = await this.timeClockRepository.clockOut();
 
     await this.eventBus.publish(
-      new TimeClockSessionFinished(
-        result.getRaw().clockInAt,
-        result.getRaw().clockOutAt
-      )
+      new TimeClockSessionFinished({
+        clockInAt: result.getRaw().clockInAt,
+        clockOutAt: result.getRaw().clockOutAt,
+      })
     );
     return result;
   }

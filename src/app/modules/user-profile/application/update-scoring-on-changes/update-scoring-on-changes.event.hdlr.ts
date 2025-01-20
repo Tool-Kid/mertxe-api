@@ -11,7 +11,7 @@ export class UpdateScoringOnChangesEventHdlr
   async execute(event: ScoringRecordAddedEvent): Promise<any> {
     const userProfile = await this.userProfileRepository.getUserProfile();
     await this.userProfileRepository.updateScoring(
-      userProfile.get('scoring') + event.points
+      userProfile.get('scoring') + event.data.points
     );
   }
 }

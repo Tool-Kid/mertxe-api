@@ -46,7 +46,7 @@ export class RegisterController implements IController {
       .select('*');
 
     const result = await this.eventBus.publish(
-      new UserRegisteredEvent(user.id)
+      new UserRegisteredEvent({ userId: user.id })
     );
 
     await client

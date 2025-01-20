@@ -17,7 +17,9 @@ export class ScoringRecord extends Aggregate<ScoringRecordProps> {
 
   static async createForReason(reason: ScoringRecordReason, data: any) {
     const record = await ScoringRecordFactory.build(reason, data);
-    record.registerEvent(new ScoringRecordAddedEvent(record.get('amount')));
+    record.registerEvent(
+      new ScoringRecordAddedEvent({ points: record.get('amount') })
+    );
     return record;
   }
 }

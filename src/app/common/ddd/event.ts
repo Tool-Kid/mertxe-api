@@ -1,8 +1,8 @@
 export class Event {
   readonly name: string;
-  readonly data: any;
+  readonly data: object;
 
-  constructor(data: any) {
+  constructor(data: object) {
     this.name = this.constructor.name;
     this.data = data;
   }
