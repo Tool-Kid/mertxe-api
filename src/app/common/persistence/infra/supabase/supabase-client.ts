@@ -1,6 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Request } from 'express';
-import { REQUEST } from '@nestjs/core';
+import { Injectable } from '@nestjs/common';
 import {
   createClient,
   SupabaseClient as SupabaseClient$,
@@ -14,7 +12,6 @@ export class SupabaseClient {
   private clientsPoll = new Map<string, SupabaseClient$>([]);
 
   constructor(
-    @Inject(REQUEST) private readonly request: Request,
     private readonly config: SupabaseClientConfig,
     private readonly jwtService: JwtService,
     private readonly cls: ClsService

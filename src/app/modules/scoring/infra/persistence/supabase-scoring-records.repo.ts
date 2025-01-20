@@ -1,18 +1,15 @@
 import { ScoringRecord } from '../../domain/scoring-record';
 import { ScoringRecordsRepository } from '../../domain/scoring-records.repo';
-import {
-  ISupabaseRepository,
-  Repository,
-} from '@common/persistence/infra/supabase';
 import { ScoringRecordFactory } from '../../domain/types/factory';
 import { ScoringRecordReason } from '../../domain/scoring-record-reason';
+import { PersistenceRepository, Repository } from '@common/persistence';
 
 @Repository({
   table: 'ScoringRecords',
   entity: ScoringRecord,
 })
 export class SupabaseScoringRecordsRepository
-  extends ISupabaseRepository<ScoringRecord>
+  extends PersistenceRepository<ScoringRecord>
   implements ScoringRecordsRepository
 {
   async addScoringRecord(

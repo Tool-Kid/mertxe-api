@@ -1,17 +1,14 @@
-import {
-  ISupabaseRepository,
-  Repository,
-} from '@common/persistence/infra/supabase';
 import { TimeClockRecord } from '../../domain/time-clock-record';
 import { TimeClockRepository } from '../../domain/time-clock.repo';
 import { InvalidOperationException } from '@common/error';
+import { PersistenceRepository, Repository } from '@common/persistence';
 
 @Repository({
   table: 'TimeClockRecords',
   entity: TimeClockRecord,
 })
 export class SupabaseTimeclockRepository
-  extends ISupabaseRepository<TimeClockRecord>
+  extends PersistenceRepository<TimeClockRecord>
   implements TimeClockRepository
 {
   async clockIn(): Promise<TimeClockRecord> {

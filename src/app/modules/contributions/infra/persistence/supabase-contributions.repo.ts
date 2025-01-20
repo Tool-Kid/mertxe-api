@@ -1,16 +1,13 @@
 import { ContributionsRepository } from '../../domain/contributions.repo';
 import { Contribution } from '../../domain/contribution';
-import {
-  ISupabaseRepository,
-  Repository,
-} from '@common/persistence/infra/supabase';
+import { PersistenceRepository, Repository } from '@common/persistence';
 
 @Repository({
   table: 'Contributions',
   entity: Contribution,
 })
 export class SupabaseContributionsRepository
-  extends ISupabaseRepository<Contribution>
+  extends PersistenceRepository<Contribution>
   implements ContributionsRepository
 {
   async getContributions(): Promise<Contribution[]> {

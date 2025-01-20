@@ -1,5 +1,5 @@
 import { applyDecorators, Injectable } from '@nestjs/common';
-import { DomainEntity } from '../infra/supabase/entity';
+import { DomainEntity } from './entity';
 
 interface RepositoryOptions {
   table: string;
@@ -10,8 +10,10 @@ export function RepositoryDecorator(
   options: RepositoryOptions
 ): ClassDecorator {
   return (target: Function) => {
-    target.prototype.tableName = options.table;
-    target.prototype.entity = options.entity;
+    const prefix = target.name;
+    const buildKey = (prop) => `${prefix}__${prop}`;
+    Reflect.defineMetadata(buildKey('tableName'), options.table, target);
+    Reflect.defineMetadata(buildKey('entity'), options.entity, target);
   };
 }
 
