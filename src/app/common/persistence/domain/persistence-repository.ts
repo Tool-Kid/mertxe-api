@@ -1,11 +1,11 @@
-import { Type } from '@nestjs/common';
 import { Entity } from 'types-ddd';
 import { Criteria } from './criteria';
 import { PersistenceAdapter } from './persistence-adapter';
+import { Class } from '@common/types';
 
 export class PersistenceRepository<RepositoryEntity extends Entity<any>> {
   readonly tableName: string;
-  readonly entity: Type<RepositoryEntity>;
+  readonly entity: Class<RepositoryEntity>;
   readonly adapter: PersistenceAdapter<RepositoryEntity>;
 
   async findAll(): Promise<RepositoryEntity[]> {

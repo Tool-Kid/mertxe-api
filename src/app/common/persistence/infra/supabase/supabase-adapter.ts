@@ -1,14 +1,14 @@
 import { SupabaseClient } from './supabase-client';
-import { Type } from '@nestjs/common';
 import { toCamelCase, toSnakeCase } from '@common/utils';
 import { Entity } from 'types-ddd';
 import { Criteria, PersistenceAdapter } from '@common/persistence';
+import { Class } from '@common/types';
 
 export class SupabaseAdapter<RepositoryEntity extends Entity<any>>
   implements PersistenceAdapter<RepositoryEntity>
 {
   readonly tableName: string;
-  readonly entity: Type<RepositoryEntity>;
+  readonly entity: Class<RepositoryEntity>;
   readonly client: SupabaseClient;
 
   async getClient() {

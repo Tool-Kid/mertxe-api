@@ -8,7 +8,7 @@ import { PersistenceRepository, Repository } from '@common/persistence';
   table: 'ScoringRecords',
   entity: ScoringRecord,
 })
-export class SupabaseScoringRecordsRepository
+export class ScoringRecordsRepositoryImpl
   extends PersistenceRepository<ScoringRecord>
   implements ScoringRecordsRepository
 {

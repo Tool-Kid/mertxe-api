@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ContributionsRepository } from './domain/contributions.repo';
-import { SupabaseContributionsRepository } from './infra/persistence/supabase-contributions.repo';
+import { ContributionsRepositoryImpl } from './infra/persistence/contributions-impl.repo';
 import { GetContributionsQryHdler } from './application/get-contributions/get-contributions.qry.hdler';
 import { SupabaseModule } from '@common/persistence/infra/supabase';
 import { GetContributionsController } from './infra/http/get-contributions/get-contributions.controller';
@@ -20,7 +20,7 @@ const COMMAND_HANDLERS = [AddContributionCmdHdlr, ApproveContributionCmdHdlr];
       repositories: [
         {
           provide: ContributionsRepository,
-          useClass: SupabaseContributionsRepository,
+          useClass: ContributionsRepositoryImpl,
         },
       ],
     }),

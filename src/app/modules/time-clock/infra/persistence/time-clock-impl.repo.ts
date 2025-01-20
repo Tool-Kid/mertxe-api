@@ -7,7 +7,7 @@ import { PersistenceRepository, Repository } from '@common/persistence';
   table: 'TimeClockRecords',
   entity: TimeClockRecord,
 })
-export class SupabaseTimeclockRepository
+export class TimeclockRepositoryImpl
   extends PersistenceRepository<TimeClockRecord>
   implements TimeClockRepository
 {

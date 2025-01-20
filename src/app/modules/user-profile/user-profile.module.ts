@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { UserProfileRepository } from './domain/user-profile.repo';
-import { SupabaseUserProfileRepository } from './infra/persistence/supabase-user-profile.repo';
+import { UserProfileRepositoryImpl } from './infra/persistence/user-profile-impl.repo';
 import { UserProfileController } from './infra/http/get-user-profile/get-user-profile.controller';
 import { SupabaseModule } from '@common/persistence/infra/supabase';
 import { CqrsModule } from '@nestjs/cqrs';
@@ -17,7 +17,7 @@ const EVENT_HANDLERS = [UpdateScoringOnChangesEventHdlr];
       repositories: [
         {
           provide: UserProfileRepository,
-          useClass: SupabaseUserProfileRepository,
+          useClass: UserProfileRepositoryImpl,
         },
       ],
     }),

@@ -6,7 +6,7 @@ import { UserProfileRepository } from '../../domain/user-profile.repo';
   table: 'UserProfiles',
   entity: UserProfile,
 })
-export class SupabaseUserProfileRepository
+export class UserProfileRepositoryImpl
   extends PersistenceRepository<UserProfile>
   implements UserProfileRepository
 {
