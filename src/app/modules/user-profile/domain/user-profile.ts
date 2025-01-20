@@ -1,4 +1,4 @@
-import { Aggregate } from 'types-ddd';
+import { Aggregate } from '@common/ddd';
 
 interface UserProfileProps {
   id: number;

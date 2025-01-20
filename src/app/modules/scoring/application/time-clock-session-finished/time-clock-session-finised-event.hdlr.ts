@@ -26,9 +26,12 @@ export class TimeClockSessionFinishedEventHandler
     const scoringRecord = await this.scoringRecordsRepository.addScoringRecord(
       record
     );
-    await this.eventBus.publish(
-      new ScoringRecordAddedEvent(scoringRecord.get('amount'))
-    );
+
+    const events = record.pullEvents();
+    for (const event of events) {
+      await this.eventBus.publish(event);
+    }
+    
     return scoringRecord;
   }
 }

@@ -139,7 +139,7 @@ export const API_SPEC: ApiSpec = {
           description: 'Approves a user contribution',
           type: OperationType.UPDATE,
           roles: [Role.ADMIN],
-          path: path(ApiGroup.CONTRIBUTIONS, 'contributions/approve'),
+          path: path(ApiGroup.CONTRIBUTIONS, 'contributions/:id/approve'),
         },
       ],
     },

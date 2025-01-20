@@ -1,6 +1,5 @@
 import { Class } from '@common/types';
-import { Entity as TypesDDDEntity, Aggregate } from 'types-ddd';
+import { Entity as TypesDDDEntity } from 'types-ddd';
+import { Aggregate } from '@common/ddd';
 
-export type DomainEntity<Props> =
-  | Class<TypesDDDEntity<Props>>
-  | Class<Aggregate<Props>>;
+export type DomainEntity<Props> = Class<Aggregate<Props>>;

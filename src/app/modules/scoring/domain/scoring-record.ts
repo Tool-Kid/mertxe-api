@@ -1,6 +1,7 @@
-import { Aggregate } from 'types-ddd';
+import { Aggregate } from '@common/ddd';
 import { ScoringRecordReason } from './scoring-record-reason';
 import { ScoringRecordFactory } from './types/factory';
+import { ScoringRecordAddedEvent } from './scoring-record-added.event';
 
 export interface ScoringRecordProps {
   id?: number;
@@ -14,7 +15,9 @@ export class ScoringRecord extends Aggregate<ScoringRecordProps> {
     super(props);
   }
 
-  static createForReason(reason: ScoringRecordReason, data: any) {
-    return ScoringRecordFactory.build(reason, data);
+  static async createForReason(reason: ScoringRecordReason, data: any) {
+    const record = await ScoringRecordFactory.build(reason, data);
+    record.registerEvent(new ScoringRecordAddedEvent(record.get('amount')));
+    return record;
   }
 }
