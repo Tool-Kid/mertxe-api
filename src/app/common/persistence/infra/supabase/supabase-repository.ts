@@ -2,54 +2,10 @@ import { SupabaseClient } from './supabase-client';
 import { Type } from '@nestjs/common';
 import { toCamelCase, toSnakeCase } from '@common/utils';
 import { Entity } from 'types-ddd';
-
-type SupabaseFilterOperator =
-  | 'eq'
-  | 'neq'
-  | 'gt'
-  | 'gte'
-  | 'lt'
-  | 'lte'
-  | 'like'
-  | 'ilike'
-  | 'is'
-  | 'in'
-  | 'cs'
-  | 'cd'
-  | 'sl'
-  | 'sr'
-  | 'nxl'
-  | 'nxr'
-  | 'adj'
-  | 'ov'
-  | 'fts'
-  | 'plfts'
-  | 'phfts'
-  | 'wfts';
-
-interface SupabaseFilter {
-  column: string;
-  operator: `${'' | 'not.'}${SupabaseFilterOperator}`;
-  value: any;
-}
-
-interface SupabaseCriteria {
-  filters: [string, `${'' | 'not.'}${SupabaseFilterOperator}`, any][];
-}
-
-interface InternalISupabaseRepository<RepositoryEntity extends Entity<any>> {
-  readonly client: SupabaseClient;
-  readonly tableName: string;
-  readonly entity: Type<RepositoryEntity>;
-
-  findAll(): Promise<RepositoryEntity[]>;
-  findOne(criteria?: SupabaseCriteria): Promise<RepositoryEntity>;
-  create(entity: Partial<RepositoryEntity>): Promise<Partial<RepositoryEntity>>;
-  update(entity: Partial<RepositoryEntity>): Promise<Partial<RepositoryEntity>>;
-}
+import { Criteria, PersistenceRepository } from '@common/persistence';
 
 export class ISupabaseRepository<RepositoryEntity extends Entity<any>>
-  implements InternalISupabaseRepository<RepositoryEntity>
+  implements PersistenceRepository<RepositoryEntity>
 {
   readonly client: SupabaseClient;
   readonly tableName: string;
@@ -84,7 +40,7 @@ export class ISupabaseRepository<RepositoryEntity extends Entity<any>>
     return raw;
   }
 
-  async findOne(criteria?: SupabaseCriteria): Promise<RepositoryEntity> {
+  async findOne(criteria?: Criteria): Promise<RepositoryEntity> {
     const client = await this.getClient();
     const query = client.from(this.tableName).select('*');
     if (criteria?.filters) {

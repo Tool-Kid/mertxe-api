@@ -1,13 +1,13 @@
-import { ISupabaseRepository, SupabaseRepository } from '@common/supabase';
+import { PersistenceRepository, Repository } from '@common/persistence';
 import { UserProfile } from '../../domain/user-profile';
 import { UserProfileRepository } from '../../domain/user-profile.repo';
 
-@SupabaseRepository({
+@Repository({
   table: 'UserProfiles',
   entity: UserProfile,
 })
 export class SupabaseUserProfileRepository
-  extends ISupabaseRepository<UserProfile>
+  extends PersistenceRepository<UserProfile>
   implements UserProfileRepository
 {
   async setInitialData(profile: Partial<UserProfile>): Promise<UserProfile> {

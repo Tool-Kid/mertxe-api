@@ -1,9 +1,12 @@
-import { ISupabaseRepository, SupabaseRepository } from '@common/supabase';
+import {
+  ISupabaseRepository,
+  Repository,
+} from '@common/persistence/infra/supabase';
 import { TimeClockRecord } from '../../domain/time-clock-record';
 import { TimeClockRepository } from '../../domain/time-clock.repo';
 import { InvalidOperationException } from '@common/error';
 
-@SupabaseRepository({
+@Repository({
   table: 'TimeClockRecords',
   entity: TimeClockRecord,
 })

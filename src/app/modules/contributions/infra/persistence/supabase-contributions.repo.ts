@@ -1,8 +1,11 @@
 import { ContributionsRepository } from '../../domain/contributions.repo';
 import { Contribution } from '../../domain/contribution';
-import { ISupabaseRepository, SupabaseRepository } from '@common/supabase';
+import {
+  ISupabaseRepository,
+  Repository,
+} from '@common/persistence/infra/supabase';
 
-@SupabaseRepository({
+@Repository({
   table: 'Contributions',
   entity: Contribution,
 })

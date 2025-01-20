@@ -1,5 +1,5 @@
 import { BadRequestException, Body } from '@nestjs/common';
-import { SupabaseClient } from '../../../../../common/supabase';
+import { SupabaseClient } from '../../../../../common/persistence/infra/supabase';
 import { RegisterDto, RegisterResponse } from './register.dto';
 import { AuthService } from '../../../domain/auth.service';
 import { JwtService } from '@nestjs/jwt';

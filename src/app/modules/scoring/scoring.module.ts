@@ -6,7 +6,7 @@ import { SupabaseScoringRecordsRepository } from './infra/persistence/supabase-s
 import { GetScoringRecordsQryHdlr } from './application/get-scoring-records/get-scoring-records.qry.hdlr';
 import { GetScoringRecordsController } from './infra/http/get-scoring-records/get-scoring-records.controller';
 import { TimeClockSessionFinishedEventHandler } from './application/time-clock-session-finished/time-clock-session-finised-event.hdlr';
-import { SupabaseModule } from '@common/supabase';
+import { SupabaseModule } from '@common/persistence/infra/supabase';
 
 const EVENT_HANDLERS = [
   UserRegisteredEventHandler,

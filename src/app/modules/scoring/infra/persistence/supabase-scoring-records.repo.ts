@@ -1,10 +1,13 @@
 import { ScoringRecord } from '../../domain/scoring-record';
 import { ScoringRecordsRepository } from '../../domain/scoring-records.repo';
-import { ISupabaseRepository, SupabaseRepository } from '@common/supabase';
+import {
+  ISupabaseRepository,
+  Repository,
+} from '@common/persistence/infra/supabase';
 import { ScoringRecordFactory } from '../../domain/types/factory';
 import { ScoringRecordReason } from '../../domain/scoring-record-reason';
 
-@SupabaseRepository({
+@Repository({
   table: 'ScoringRecords',
   entity: ScoringRecord,
 })

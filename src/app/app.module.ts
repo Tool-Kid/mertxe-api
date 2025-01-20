@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './modules/auth/auth.module';
-import { SupabaseModule } from '@common/supabase/supabase.module';
+import { SupabaseModule } from '@common/persistence/infra/supabase/supabase.module';
 import { TimeClockModule } from './modules/time-clock/time-clock.module';
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
