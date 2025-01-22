@@ -12,6 +12,7 @@ import { ClsModule } from 'nestjs-cls';
 import { ContributionsModule } from './modules/contributions/contributions.module';
 import { CatchExceptionFilter } from '@common/error';
 import { RolesGuard } from '@modules/auth/infra/passport/jwt/roles.guard';
+import { ChallengesModule } from './modules/challenges/challenges.module';
 
 const THIRD_PARTY_MODULES = [
   SupabaseModule.forRoot(),
@@ -34,10 +35,12 @@ const FEATURE_MODULES = [
   TimeClockModule,
   UserProfileModule,
   ScoringModule,
+  ContributionsModule,
+  ChallengesModule,
 ];
 
 @Module({
-  imports: [...THIRD_PARTY_MODULES, ...FEATURE_MODULES, ContributionsModule],
+  imports: [...THIRD_PARTY_MODULES, ...FEATURE_MODULES],
   providers: [
     {
       provide: APP_GUARD,
