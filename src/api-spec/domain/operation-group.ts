@@ -6,6 +6,7 @@ export enum ApiGroup {
   USER_PROFILE = 'User Profile',
   SCORING = 'Scoring',
   CONTRIBUTIONS = 'Contributions',
+  CHALLENGES = 'CHALLENGES',
 }
 
 export interface ApiOperationGroup {

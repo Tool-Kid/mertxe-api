@@ -23,9 +23,15 @@ export enum ContributionsOperationName {
   APPROVE_CONTRIBUTION = 'Approve a Contribution',
 }
 
+export enum ChallengesOperationName {
+  GET_ACTIVE_CHALLENGES = 'Get active Challenges',
+  CLAIM_CHALLENGE_REWARD = 'Claim Reward of a Challenge',
+}
+
 export type OperationName =
   | AuthOperationName
   | UserProfileOperationName
   | TimeClockOperationName
   | ScoringOperationName
-  | ContributionsOperationName;
+  | ContributionsOperationName
+  | ChallengesOperationName;

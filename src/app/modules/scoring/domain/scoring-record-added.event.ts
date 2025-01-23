@@ -1,7 +1,8 @@
 import { Event } from '@common/ddd';
+import { APP_EVENTS } from '@common/events';
 
 export class ScoringRecordAddedEvent extends Event {
   constructor(readonly data: { points: number }) {
-    super(data);
+    super(APP_EVENTS.SCORING__RECORD_ADDED, data);
   }
 }

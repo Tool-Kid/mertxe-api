@@ -1,6 +1,6 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import { CqrsModule } from '@nestjs/cqrs';
 import { EventBus } from './event-bus';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({})
 @Global()
@@ -8,7 +8,7 @@ export class EventsModule {
   static forRoot(): DynamicModule {
     return {
       module: EventsModule,
-      imports: [CqrsModule],
+      imports: [EventEmitterModule.forRoot()],
       providers: [EventBus],
       exports: [EventBus],
     };

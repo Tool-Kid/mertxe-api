@@ -1,12 +1,5 @@
-const SCOPES = {
-  AUTH: 'auth',
-};
-
-function event<Scope extends typeof SCOPES>(scope: keyof Scope, name: string) {
-  const scopeValue = SCOPES[scope as any];
-  return `${scopeValue}.${name}`;
-}
-
-export const EVENTS = {
-  USER_REGISTERED: event('AUTH', 'user_registered'),
+export const APP_EVENTS = {
+  AUTH__USER_REGISTERED: 'auth.user_registered',
+  TIME_CLOCK__SESSION_FINISHED: 'time-clock.session_finished',
+  SCORING__RECORD_ADDED: 'scoring.record_added',
 };

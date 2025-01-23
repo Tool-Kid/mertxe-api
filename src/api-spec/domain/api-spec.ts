@@ -2,6 +2,7 @@ import { ApiOperation } from './operation';
 import { ApiGroup, ApiOperationGroup } from './operation-group';
 import {
   AuthOperationName,
+  ChallengesOperationName,
   ContributionsOperationName,
   OperationName,
   ScoringOperationName,
@@ -140,6 +141,25 @@ export const API_SPEC: ApiSpec = {
           type: OperationType.UPDATE,
           roles: [Role.ADMIN],
           path: path(ApiGroup.CONTRIBUTIONS, 'contributions/:id/approve'),
+        },
+      ],
+    },
+    {
+      name: ApiGroup.CHALLENGES,
+      operations: [
+        {
+          name: ChallengesOperationName.GET_ACTIVE_CHALLENGES,
+          description: 'Get active Challenges for a User',
+          type: OperationType.RETRIEVE,
+          roles: [Role.USER],
+          path: path(ApiGroup.CHALLENGES, 'challenges/active'),
+        },
+        {
+          name: ChallengesOperationName.CLAIM_CHALLENGE_REWARD,
+          description: 'Claim the Reward for a Challenge',
+          type: OperationType.CREATE,
+          roles: [Role.USER],
+          path: path(ApiGroup.CHALLENGES, 'challenges/:id/claim'),
         },
       ],
     },

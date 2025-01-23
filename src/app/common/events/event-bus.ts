@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CommandBus } from '@nestjs/cqrs';
-
+import { EventEmitter2 } from '@nestjs/event-emitter';
+import { Event as Event$ } from '@common/ddd';
 @Injectable()
 export class EventBus {
-  constructor(private readonly bus: CommandBus) {}
+  constructor(private readonly eventEmitter: EventEmitter2) {}
 
-  async publish<Event>(event: Event): Promise<any> {
-    const result = await this.bus.execute(event);
+  async publish<Event extends Event$>(event: Event): Promise<any> {
+    const result = await this.eventEmitter.emitAsync(event.name, event.data);
     return result;
   }
 }

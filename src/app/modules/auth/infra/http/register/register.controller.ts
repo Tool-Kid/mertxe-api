@@ -7,6 +7,7 @@ import { UserRegisteredEvent } from '../../../domain/user-registered.event';
 import { EventBus } from '@common/events';
 import { Controller, IController, HandleOperation } from '@common/http';
 import { ApiGroup, AuthOperationName } from 'src/api-spec';
+import { APP_EVENTS } from '@common/events';
 
 @Controller({
   group: ApiGroup.AUTH,
