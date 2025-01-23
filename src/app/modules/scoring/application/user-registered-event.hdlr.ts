@@ -1,10 +1,10 @@
 import { APP_EVENTS } from '@common/events';
 import { ScoringRecordsRepository } from '../domain/scoring-records.repo';
 import { RegisterScoringRecord } from '../domain/types/register';
-import { EventsHandler, IEventsHandler } from '@common/events';
+import { EventHandler, IEventHandler } from '@common/events';
 
-@EventsHandler(APP_EVENTS.AUTH__USER_REGISTERED)
-export class UserRegisteredEventHandler implements IEventsHandler<any, any> {
+@EventHandler(APP_EVENTS.AUTH__USER_REGISTERED)
+export class UserRegisteredEventHandler implements IEventHandler<any, any> {
   constructor(
     private readonly scoringRecordsRepository: ScoringRecordsRepository
   ) {}

@@ -1,11 +1,11 @@
 import { Event as Event$ } from '@common/ddd';
 import { OnEvent } from '@nestjs/event-emitter';
 
-export interface IEventsHandler<Event extends Event$, Response> {
+export interface IEventHandler<Event extends Event$, Response> {
   handle(event: Event): Promise<Response>;
 }
 
-export function EventsHandler(eventName: string): ClassDecorator {
+export function EventHandler(eventName: string): ClassDecorator {
   return function (target: Function) {
     const handleMethod = target.prototype.handle;
 

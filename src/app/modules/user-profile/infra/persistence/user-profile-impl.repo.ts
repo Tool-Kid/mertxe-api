@@ -1,6 +1,6 @@
 import { PersistenceRepository, Repository } from '@common/persistence';
-import { UserProfile } from '../../domain/user-profile';
-import { UserProfileRepository } from '../../domain/user-profile.repo';
+import { UserProfile } from '@modules/user-profile/domain/user-profile';
+import { UserProfileRepository } from '@modules/user-profile/domain/user-profile.repo';
 
 @Repository({
   table: 'UserProfiles',

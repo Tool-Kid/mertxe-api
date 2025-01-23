@@ -1,12 +1,12 @@
-import { EventBus, EventsHandler, IEventsHandler } from '@common/events';
+import { EventBus, EventHandler, IEventHandler } from '@common/events';
 import { ScoringRecordsRepository } from '../../domain/scoring-records.repo';
 import { TimeClockScoringRecord } from '../../domain/types/time-clock';
 import { ScoringRecordReason } from '@modules/scoring/domain/scoring-record-reason';
 import { APP_EVENTS } from '@common/events';
 
-@EventsHandler(APP_EVENTS.TIME_CLOCK__SESSION_FINISHED)
+@EventHandler(APP_EVENTS.TIME_CLOCK__SESSION_FINISHED)
 export class TimeClockSessionFinishedEventHandler
-  implements IEventsHandler<any, any>
+  implements IEventHandler<any, any>
 {
   constructor(
     private readonly scoringRecordsRepository: ScoringRecordsRepository,

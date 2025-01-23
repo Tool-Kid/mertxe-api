@@ -1,4 +1,4 @@
-import { TimeClockRepository } from '../../../domain/time-clock.repo';
+import { TimeClockRepository } from '@modules/time-clock/domain/time-clock.repo';
 import { TimeClockResponse } from '../time-clock-record.dto';
 import { Controller, IController, HandleOperation } from '@common/http';
 import { toDto } from '@common/utils/serialization';

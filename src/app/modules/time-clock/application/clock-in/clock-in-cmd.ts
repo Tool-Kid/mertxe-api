@@ -1,5 +1,5 @@
-import { TimeClockRecord } from '../../domain/time-clock-record';
-import { TimeClockRepository } from '../../domain/time-clock.repo';
+import { TimeClockRecord } from '@modules/time-clock/domain/time-clock-record';
+import { TimeClockRepository } from '@modules/time-clock/domain/time-clock.repo';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 export class ClockInCmd {}

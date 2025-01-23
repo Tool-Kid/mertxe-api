@@ -1,5 +1,5 @@
-import { ContributionsRepository } from '../../domain/contributions.repo';
-import { Contribution } from '../../domain/contribution';
+import { ContributionsRepository } from '@modules/contributions/domain/contributions.repo';
+import { Contribution } from '@modules/contributions/domain/contribution';
 import { PersistenceRepository, Repository } from '@common/persistence';
 
 @Repository({

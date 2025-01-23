@@ -2,7 +2,7 @@ import { BadRequestException, Body } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto, LoginResponse } from './login.dto';
 import { SupabaseClient } from '@common/persistence/infra/supabase';
-import { AuthService } from '../../../domain/auth.service';
+import { AuthService } from '@modules/auth/domain/auth.service';
 import { Controller, IController, HandleOperation } from '@common/http';
 import { ApiGroup, AuthOperationName } from 'src/api-spec';
 

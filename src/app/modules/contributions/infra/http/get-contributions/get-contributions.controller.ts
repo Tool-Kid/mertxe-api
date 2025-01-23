@@ -1,7 +1,7 @@
 import { GetContributionsResponse } from './get-contributions.dto';
 import { QueryBus } from '@nestjs/cqrs';
-import { GetContributionsQryResponse } from '../../../application/get-contributions/get-contributions.qry.hdler';
-import { GetContributionsQry } from '../../../application/get-contributions/get-contributions.qry';
+import { GetContributionsQryResponse } from '@modules/contributions/application/get-contributions/get-contributions.qry.hdler';
+import { GetContributionsQry } from '@modules/contributions/application/get-contributions/get-contributions.qry';
 import { execute } from '@common/cqrs';
 import { Controller, IController, HandleOperation } from '@common/http';
 import { toDto } from '@common/utils/serialization';

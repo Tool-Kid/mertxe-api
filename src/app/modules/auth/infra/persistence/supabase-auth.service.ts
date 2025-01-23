@@ -4,7 +4,7 @@ import {
   Credentials,
   LoginResult,
   RegisterResult,
-} from '../../domain/auth.service';
+} from '@modules/auth/domain/auth.service';
 import { SupabaseClient } from '@common/persistence/infra/supabase';
 
 @Injectable()

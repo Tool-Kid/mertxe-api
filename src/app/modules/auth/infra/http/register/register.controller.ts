@@ -1,13 +1,12 @@
 import { BadRequestException, Body } from '@nestjs/common';
-import { SupabaseClient } from '../../../../../common/persistence/infra/supabase';
+import { SupabaseClient } from '@common/persistence/infra/supabase';
 import { RegisterDto, RegisterResponse } from './register.dto';
-import { AuthService } from '../../../domain/auth.service';
+import { AuthService } from '@modules/auth/domain/auth.service';
 import { JwtService } from '@nestjs/jwt';
-import { UserRegisteredEvent } from '../../../domain/user-registered.event';
+import { UserRegisteredEvent } from '@modules/auth/domain/user-registered.event';
 import { EventBus } from '@common/events';
 import { Controller, IController, HandleOperation } from '@common/http';
 import { ApiGroup, AuthOperationName } from 'src/api-spec';
-import { APP_EVENTS } from '@common/events';
 
 @Controller({
   group: ApiGroup.AUTH,

@@ -1,9 +1,9 @@
 import { TimeClockResponse } from '../time-clock-record.dto';
 import { CommandBus } from '@nestjs/cqrs';
-import { ClockOutCmd } from '../../../application/clock-out/clock-out.cmd';
+import { ClockOutCmd } from '@modules/time-clock/application/clock-out/clock-out.cmd';
 import { toDto } from '@common/utils/serialization';
 import { execute } from '@common/cqrs';
-import { TimeClockRecord } from '../../../domain/time-clock-record';
+import { TimeClockRecord } from '@modules/time-clock/domain/time-clock-record';
 import { Controller, IController, HandleOperation } from '@common/http';
 import { ApiGroup, TimeClockOperationName } from 'src/api-spec';
 
