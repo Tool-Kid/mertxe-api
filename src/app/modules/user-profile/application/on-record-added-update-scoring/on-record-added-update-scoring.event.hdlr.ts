@@ -2,8 +2,8 @@ import { EventHandler, IEventHandler } from '@common/events';
 import { UserProfileRepository } from '@modules/user-profile/domain/user-profile.repo';
 import { APP_EVENTS } from '@common/events';
 
-@EventHandler(APP_EVENTS.SCORING__RECORD_ADDED)
-export class UpdateScoringOnChangesEventHdlr
+@EventHandler(APP_EVENTS.SCORING.RECORD_ADDED)
+export class OnRecordAddedUpdateScoringEventHdlr
   implements IEventHandler<any, any>
 {
   constructor(private readonly userProfileRepository: UserProfileRepository) {}

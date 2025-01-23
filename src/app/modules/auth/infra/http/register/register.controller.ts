@@ -51,14 +51,14 @@ export class RegisterController implements IController {
 
     await client
       .from('UserProfiles')
-      .update({ scoring: result.amount })
+      .update({ scoring: result.data.amount })
       .eq('user_id', user.id);
 
     return {
       user: user,
       accessToken: this.jwtService.sign({ supabase: user, credentials: dto }),
       profile: {
-        scoring: result.amount,
+        scoring: result.data.amount,
       },
     };
   }

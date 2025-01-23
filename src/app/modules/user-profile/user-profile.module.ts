@@ -5,10 +5,10 @@ import { UserProfileController } from './infra/http/get-user-profile/get-user-pr
 import { SupabaseModule } from '@common/persistence/infra/supabase';
 import { CqrsModule } from '@nestjs/cqrs';
 import { GetUserProfileQryHdlr } from './application/get-user-profile/get-user-profile.qry';
-import { UpdateScoringOnChangesEventHdlr } from './application/update-scoring-on-changes/update-scoring-on-changes.event.hdlr';
+import { OnRecordAddedUpdateScoringEventHdlr } from './application/on-record-added-update-scoring/on-record-added-update-scoring.event.hdlr';
 
 const QUERY_HANDLERS = [GetUserProfileQryHdlr];
-const EVENT_HANDLERS = [UpdateScoringOnChangesEventHdlr];
+const EVENT_HANDLERS = [OnRecordAddedUpdateScoringEventHdlr];
 
 @Module({
   imports: [

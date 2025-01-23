@@ -4,8 +4,8 @@ import { TimeClockScoringRecord } from '../../domain/types/time-clock';
 import { ScoringRecordReason } from '@modules/scoring/domain/scoring-record-reason';
 import { APP_EVENTS } from '@common/events';
 
-@EventHandler(APP_EVENTS.TIME_CLOCK__SESSION_FINISHED)
-export class TimeClockSessionFinishedEventHandler
+@EventHandler(APP_EVENTS.TIMECLOCK.SESSION_FINISHED)
+export class OnTimeClockSessionFinishedEventHandler
   implements IEventHandler<any, any>
 {
   constructor(
