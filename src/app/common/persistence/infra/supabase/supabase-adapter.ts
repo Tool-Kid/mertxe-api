@@ -1,10 +1,10 @@
 import { SupabaseClient } from './supabase-client';
 import { toCamelCase, toSnakeCase } from '@common/utils';
-import { Entity } from 'types-ddd';
 import { Criteria, PersistenceAdapter } from '@common/persistence';
 import { Class } from '@common/types';
+import { Aggregate } from '@common/ddd';
 
-export class SupabaseAdapter<RepositoryEntity extends Entity<any>>
+export class SupabaseAdapter<RepositoryEntity extends Aggregate<any>>
   implements PersistenceAdapter<RepositoryEntity>
 {
   readonly tableName: string;

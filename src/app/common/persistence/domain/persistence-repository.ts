@@ -1,9 +1,9 @@
-import { Entity } from 'types-ddd';
+import { Aggregate } from '@common/ddd';
 import { Criteria } from './criteria';
 import { PersistenceAdapter } from './persistence-adapter';
 import { Class } from '@common/types';
 
-export class PersistenceRepository<RepositoryEntity extends Entity<any>> {
+export class PersistenceRepository<RepositoryEntity extends Aggregate<any>> {
   readonly tableName: string;
   readonly entity: Class<RepositoryEntity>;
   readonly adapter: PersistenceAdapter<RepositoryEntity>;
