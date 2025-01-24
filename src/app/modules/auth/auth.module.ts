@@ -4,8 +4,8 @@ import { RegisterController } from './infra/http/register/register.controller';
 import { LoginController } from './infra/http/login/login.controller';
 import { AuthService } from './domain/auth.service';
 import { SupabaseAuthService } from './infra/persistence/supabase-auth.service';
-import { JWTStrategy } from 'src/app/modules/auth/infra/passport';
 import { CqrsModule } from '@nestjs/cqrs';
+import { JWTStrategy } from './infra/passport';
 
 @Module({
   imports: [

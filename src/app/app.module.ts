@@ -14,9 +14,12 @@ import { CatchExceptionFilter } from '@mertxe/core';
 import { RolesGuard } from '@modules/auth/infra/passport/jwt/roles.guard';
 import { ChallengesModule } from './modules/challenges/challenges.module';
 
-const THIRD_PARTY_MODULES = [
+const CORE_MODULES = [
   PersistenceModule.forRoot({ adapter: 'supabase' }),
   EventsModule.forRoot(),
+];
+
+const THIRD_PARTY_MODULES = [
   CqrsModule.forRoot(),
   ClsModule.forRoot({
     middleware: {
@@ -40,7 +43,7 @@ const FEATURE_MODULES = [
 ];
 
 @Module({
-  imports: [...THIRD_PARTY_MODULES, ...FEATURE_MODULES],
+  imports: [...THIRD_PARTY_MODULES, ...FEATURE_MODULES, ...CORE_MODULES],
   providers: [
     {
       provide: APP_GUARD,
