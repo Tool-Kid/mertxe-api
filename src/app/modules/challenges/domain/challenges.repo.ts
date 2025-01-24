@@ -1,4 +1,4 @@
-import { Collection } from '@common/types';
+import { Collection } from '@mertxe/core';
 import { Challenge } from './challenge';
 
 export abstract class ChallengesRepository {

@@ -1,10 +1,10 @@
 import { GetUserProfileResponse } from './user-profile.dto';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetUserProfileQry } from '@modules/user-profile/application/get-user-profile/get-user-profile.qry';
-import { toDto } from '@common/utils/serialization';
+import { toDto } from '@mertxe/core';
 import { UserProfile } from '@modules/user-profile/domain/user-profile';
-import { execute } from '@common/cqrs';
-import { Controller, IController, HandleOperation } from '@common/http';
+import { execute } from '@mertxe/core';
+import { Controller, IController, HandleOperation } from '@mertxe/core';
 import { ApiGroup, UserProfileOperationName } from 'src/api-spec';
 
 @Controller({

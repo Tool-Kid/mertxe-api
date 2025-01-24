@@ -1,7 +1,7 @@
 import { TimeClockRepository } from '@modules/time-clock/domain/time-clock.repo';
 import { TimeClockResponse } from '../time-clock-record.dto';
-import { Controller, IController, HandleOperation } from '@common/http';
-import { toDto } from '@common/utils/serialization';
+import { Controller, IController, HandleOperation } from '@mertxe/core';
+import { toDto } from '@mertxe/core';
 import { ApiGroup, TimeClockOperationName } from 'src/api-spec';
 
 @Controller({

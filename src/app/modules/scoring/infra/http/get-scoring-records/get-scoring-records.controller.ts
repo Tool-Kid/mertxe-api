@@ -1,10 +1,10 @@
 import { GetScoringRecordsResponse } from './get-scoring-records.dto';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetScoringRecordsQry } from '../../../application/get-scoring-records/get-scoring-redords.qry';
-import { execute } from '@common/cqrs';
+import { execute } from '@mertxe/core';
 import { ScoringRecord } from '@modules/scoring/domain/scoring-record';
-import { toDto } from '@common/utils/serialization';
-import { Controller, IController, HandleOperation } from '@common/http';
+import { toDto } from '@mertxe/core';
+import { Controller, IController, HandleOperation } from '@mertxe/core';
 import { ApiGroup, ScoringOperationName } from 'src/api-spec';
 
 @Controller({

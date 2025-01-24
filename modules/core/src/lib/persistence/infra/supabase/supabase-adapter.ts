@@ -1,8 +1,8 @@
 import { SupabaseClient } from './supabase-client';
-import { toCamelCase, toSnakeCase } from '@common/utils';
-import { Criteria, PersistenceAdapter } from '@common/persistence';
-import { Class } from '@common/types';
-import { Aggregate } from '@common/ddd';
+import { toCamelCase, toSnakeCase } from 'modules/core/src/lib/utils';
+import { Criteria, PersistenceAdapter } from 'modules/core/src/lib/persistence';
+import { Class } from 'modules/core/src/lib/types';
+import { Aggregate } from 'modules/core/src/lib/ddd';
 
 export class SupabaseAdapter<RepositoryEntity extends Aggregate<any>>
   implements PersistenceAdapter<RepositoryEntity>

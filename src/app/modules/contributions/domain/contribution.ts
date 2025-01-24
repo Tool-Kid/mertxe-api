@@ -1,5 +1,5 @@
 import { ContributionType } from './contribution-type';
-import { Aggregate } from '@common/ddd';
+import { Aggregate } from '@mertxe/core';
 import { ContributionFactory } from './factory';
 import { ContributionStatus } from './contribution-status';
 

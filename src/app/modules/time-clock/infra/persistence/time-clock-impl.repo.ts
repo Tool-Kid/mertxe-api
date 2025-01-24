@@ -1,7 +1,7 @@
 import { TimeClockRecord } from '@modules/time-clock/domain/time-clock-record';
 import { TimeClockRepository } from '@modules/time-clock/domain/time-clock.repo';
-import { InvalidOperationException } from '@common/error';
-import { PersistenceRepository, Repository } from '@common/persistence';
+import { InvalidOperationException } from '@mertxe/core';
+import { PersistenceRepository, Repository } from '@mertxe/core';
 
 @Repository({
   table: 'TimeClockRecords',

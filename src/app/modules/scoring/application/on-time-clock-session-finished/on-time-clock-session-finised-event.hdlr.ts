@@ -1,8 +1,8 @@
-import { EventBus, EventHandler, IEventHandler } from '@common/events';
+import { EventBus, EventHandler, IEventHandler } from '@mertxe/core';
 import { ScoringRecordsRepository } from '../../domain/scoring-records.repo';
 import { TimeClockScoringRecord } from '../../domain/types/time-clock';
 import { ScoringRecordReason } from '@modules/scoring/domain/scoring-record-reason';
-import { APP_EVENTS } from '@common/events';
+import { APP_EVENTS } from '@mertxe/core';
 
 @EventHandler(APP_EVENTS.TIMECLOCK.SESSION_FINISHED)
 export class OnTimeClockSessionFinishedEventHandler

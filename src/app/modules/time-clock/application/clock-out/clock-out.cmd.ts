@@ -2,7 +2,7 @@ import { TimeClockRecord } from '@modules/time-clock/domain/time-clock-record';
 import { TimeClockRepository } from '@modules/time-clock/domain/time-clock.repo';
 import { TimeClockSessionFinished } from '@modules/time-clock/domain/time-clock-session-finished.event';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { EventBus } from '@common/events';
+import { EventBus } from '@mertxe/core';
 
 export class ClockOutCmd {}
 

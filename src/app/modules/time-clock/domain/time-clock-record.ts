@@ -1,4 +1,4 @@
-import { Aggregate } from '@common/ddd';
+import { Aggregate } from '@mertxe/core';
 
 interface TimeClockRecordProps {
   id?: number;

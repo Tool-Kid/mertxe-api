@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { Event as Event$, EventResult } from '@common/ddd';
+import { Event as Event$, EventResult } from 'modules/core/src/lib/ddd';
 
 @Injectable()
 export class EventEmitter2EventBus {

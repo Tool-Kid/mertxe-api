@@ -1,4 +1,4 @@
-import { PersistenceRepository, Repository } from '@common/persistence';
+import { PersistenceRepository, Repository } from '@mertxe/core';
 import { UserProfile } from '@modules/user-profile/domain/user-profile';
 import { UserProfileRepository } from '@modules/user-profile/domain/user-profile.repo';
 

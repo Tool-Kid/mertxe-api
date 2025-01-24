@@ -1,6 +1,6 @@
 import { Criteria } from './criteria';
-import { Class } from '@common/types';
-import { Aggregate } from '@common/ddd';
+import { Class } from 'modules/core/src/lib/types';
+import { Aggregate } from 'modules/core/src/lib/ddd';
 
 export interface PersistenceAdapter<RepositoryEntity extends Aggregate<any>> {
   readonly tableName: string;

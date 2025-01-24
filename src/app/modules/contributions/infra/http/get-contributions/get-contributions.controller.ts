@@ -2,9 +2,9 @@ import { GetContributionsResponse } from './get-contributions.dto';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetContributionsQryResponse } from '@modules/contributions/application/get-contributions/get-contributions.qry.hdler';
 import { GetContributionsQry } from '@modules/contributions/application/get-contributions/get-contributions.qry';
-import { execute } from '@common/cqrs';
-import { Controller, IController, HandleOperation } from '@common/http';
-import { toDto } from '@common/utils/serialization';
+import { execute } from '@mertxe/core';
+import { Controller, IController, HandleOperation } from '@mertxe/core';
+import { toDto } from '@mertxe/core';
 import { ApiGroup, ContributionsOperationName } from 'src/api-spec';
 
 @Controller({

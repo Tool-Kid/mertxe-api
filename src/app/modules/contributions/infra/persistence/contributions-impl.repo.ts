@@ -1,6 +1,6 @@
 import { ContributionsRepository } from '@modules/contributions/domain/contributions.repo';
 import { Contribution } from '@modules/contributions/domain/contribution';
-import { PersistenceRepository, Repository } from '@common/persistence';
+import { PersistenceRepository, Repository } from '@mertxe/core';
 
 @Repository({
   table: 'Contributions',

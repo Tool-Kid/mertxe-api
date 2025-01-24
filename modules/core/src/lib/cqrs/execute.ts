@@ -1,4 +1,4 @@
-import { typedAsync } from '@common/utils';
+import { typedAsync } from 'modules/core/src/lib/utils';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
 interface ExecuteParams {

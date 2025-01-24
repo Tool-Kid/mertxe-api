@@ -15,6 +15,7 @@
     "baseUrl": ".",
     "paths": {
       "@common/*": ["src/app/common/*"],
+      "@mertxe/core": ["modules/core/src/index.ts"],
       "@modules/*": ["src/app/modules/*"]
     },
     "esModuleInterop": true

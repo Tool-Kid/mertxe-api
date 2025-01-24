@@ -1,4 +1,4 @@
-import { Event as Event$ } from '@common/ddd';
+import { Event as Event$ } from 'modules/core/src/lib/ddd';
 import { OnEvent } from '@nestjs/event-emitter';
 
 export interface IEventHandler<Event extends Event$, Response> {

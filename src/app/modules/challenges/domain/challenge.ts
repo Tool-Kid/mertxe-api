@@ -1,4 +1,4 @@
-import { Aggregate } from '@common/ddd';
+import { Aggregate } from '@mertxe/core';
 import { ChallengeStatus } from './challenge-status';
 import { ChallengeFrequency } from './challenge-frequency';
 

@@ -1,10 +1,10 @@
 import { TimeClockResponse } from '../time-clock-record.dto';
 import { CommandBus } from '@nestjs/cqrs';
 import { ClockOutCmd } from '@modules/time-clock/application/clock-out/clock-out.cmd';
-import { toDto } from '@common/utils/serialization';
-import { execute } from '@common/cqrs';
+import { toDto } from '@mertxe/core';
+import { execute } from '@mertxe/core';
 import { TimeClockRecord } from '@modules/time-clock/domain/time-clock-record';
-import { Controller, IController, HandleOperation } from '@common/http';
+import { Controller, IController, HandleOperation } from '@mertxe/core';
 import { ApiGroup, TimeClockOperationName } from 'src/api-spec';
 
 @Controller({

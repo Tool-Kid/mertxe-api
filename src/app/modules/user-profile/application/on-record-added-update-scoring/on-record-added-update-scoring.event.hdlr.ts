@@ -1,6 +1,6 @@
-import { EventHandler, IEventHandler } from '@common/events';
+import { EventHandler, IEventHandler } from '@mertxe/core';
 import { UserProfileRepository } from '@modules/user-profile/domain/user-profile.repo';
-import { APP_EVENTS } from '@common/events';
+import { APP_EVENTS } from '@mertxe/core';
 
 @EventHandler(APP_EVENTS.SCORING.RECORD_ADDED)
 export class OnRecordAddedUpdateScoringEventHdlr

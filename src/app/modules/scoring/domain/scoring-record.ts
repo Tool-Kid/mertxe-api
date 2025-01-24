@@ -1,4 +1,4 @@
-import { Aggregate } from '@common/ddd';
+import { Aggregate } from '@mertxe/core';
 import { ScoringRecordReason } from './scoring-record-reason';
 import { ScoringRecordFactory } from './types/factory';
 import { ScoringRecordAddedEvent } from './scoring-record-added.event';

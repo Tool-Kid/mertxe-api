@@ -6,9 +6,9 @@ import {
   AddContributionDto,
   AddContributionResponse,
 } from './add-contribution.dto';
-import { toDto } from '@common/utils/serialization';
-import { execute } from '@common/cqrs';
-import { Controller, HandleOperation } from '@common/http';
+import { toDto } from '@mertxe/core';
+import { execute } from '@mertxe/core';
+import { Controller, HandleOperation } from '@mertxe/core';
 import { ApiGroup, ContributionsOperationName } from 'src/api-spec';
 
 @Controller({

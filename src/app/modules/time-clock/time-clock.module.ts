@@ -5,7 +5,7 @@ import { TimeclockRepositoryImpl } from './infra/persistence/time-clock-impl.rep
 import { ClockOutController } from './infra/http/clock-out/clock-out.controller';
 import { GetTimeClockRecordsController } from './infra/http/get-time-clock/get-time-clock-records.controller';
 import { ClockOutCmdHdlr } from './application/clock-out/clock-out.cmd';
-import { SupabaseModule } from '@common/persistence/infra/supabase';
+import { SupabaseModule } from '@mertxe/core';
 import { ClockInCmdHdlr } from './application/clock-in/clock-in-cmd';
 
 const COMMAND_HANDLERS = [ClockInCmdHdlr, ClockOutCmdHdlr];

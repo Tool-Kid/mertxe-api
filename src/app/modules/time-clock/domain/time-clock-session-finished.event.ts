@@ -1,5 +1,5 @@
-import { Event } from '@common/ddd';
-import { APP_EVENTS } from '@common/events';
+import { Event } from '@mertxe/core';
+import { APP_EVENTS } from '@mertxe/core';
 
 export class TimeClockSessionFinished extends Event {
   constructor(

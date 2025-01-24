@@ -6,7 +6,7 @@ import { ScoringRecordsRepositoryImpl } from './infra/persistence/scoring-record
 import { GetScoringRecordsQryHdlr } from './application/get-scoring-records/get-scoring-records.qry.hdlr';
 import { GetScoringRecordsController } from './infra/http/get-scoring-records/get-scoring-records.controller';
 import { OnTimeClockSessionFinishedEventHandler } from './application/on-time-clock-session-finished/on-time-clock-session-finised-event.hdlr';
-import { SupabaseModule } from '@common/persistence/infra/supabase';
+import { SupabaseModule } from '@mertxe/core';
 
 const EVENT_HANDLERS = [
   OnUserRegisteredEventHandler,

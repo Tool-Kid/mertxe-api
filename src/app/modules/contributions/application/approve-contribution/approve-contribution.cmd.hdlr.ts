@@ -2,7 +2,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { ApproveContributionCmd } from './approve-contribution.cmd';
 import { Contribution } from '@modules/contributions/domain/contribution';
 import { ContributionsRepository } from '@modules/contributions/domain/contributions.repo';
-import { ResourceNotFoundException } from '@common/error';
+import { ResourceNotFoundException } from '@mertxe/core';
 
 @CommandHandler(ApproveContributionCmd)
 export class ApproveContributionCmdHdlr

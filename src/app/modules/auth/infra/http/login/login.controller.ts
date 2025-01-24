@@ -1,9 +1,9 @@
 import { BadRequestException, Body } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto, LoginResponse } from './login.dto';
-import { SupabaseClient } from '@common/persistence/infra/supabase';
+import { SupabaseClient } from '@mertxe/core';
 import { AuthService } from '@modules/auth/domain/auth.service';
-import { Controller, IController, HandleOperation } from '@common/http';
+import { Controller, IController, HandleOperation } from '@mertxe/core';
 import { ApiGroup, AuthOperationName } from 'src/api-spec';
 
 @Controller({

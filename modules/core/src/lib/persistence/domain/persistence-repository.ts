@@ -1,7 +1,7 @@
-import { Aggregate } from '@common/ddd';
+import { Aggregate } from 'modules/core/src/lib/ddd';
 import { Criteria } from './criteria';
 import { PersistenceAdapter } from './persistence-adapter';
-import { Class } from '@common/types';
+import { Class } from 'modules/core/src/lib/types';
 
 export class PersistenceRepository<RepositoryEntity extends Aggregate<any>> {
   readonly tableName: string;

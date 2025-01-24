@@ -1,9 +1,9 @@
-import { Controller, IController, HandleOperation } from '@common/http';
+import { Controller, IController, HandleOperation } from '@mertxe/core';
 import { Contribution } from '@modules/contributions/domain/contribution';
 import { Body, Param } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { toDto } from '@common/utils/serialization';
-import { execute } from '@common/cqrs';
+import { toDto } from '@mertxe/core';
+import { execute } from '@mertxe/core';
 import {
   ApproveContributionDto,
   ApproveContributionResponse,

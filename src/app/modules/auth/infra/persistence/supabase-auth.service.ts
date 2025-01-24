@@ -5,7 +5,7 @@ import {
   LoginResult,
   RegisterResult,
 } from '@modules/auth/domain/auth.service';
-import { SupabaseClient } from '@common/persistence/infra/supabase';
+import { SupabaseClient } from '@mertxe/core';
 
 @Injectable()
 export class SupabaseAuthService implements AuthService {

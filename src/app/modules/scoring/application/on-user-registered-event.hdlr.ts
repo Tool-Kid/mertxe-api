@@ -1,7 +1,7 @@
-import { APP_EVENTS } from '@common/events';
+import { APP_EVENTS } from '@mertxe/core';
 import { ScoringRecordsRepository } from '../domain/scoring-records.repo';
 import { RegisterScoringRecord } from '../domain/types/register';
-import { EventHandler, IEventHandler } from '@common/events';
+import { EventHandler, IEventHandler } from '@mertxe/core';
 
 @EventHandler(APP_EVENTS.AUTH.USER_REGISTERED)
 export class OnUserRegisteredEventHandler implements IEventHandler<any, any> {

@@ -2,7 +2,7 @@ import { ScoringRecord } from '../../domain/scoring-record';
 import { ScoringRecordsRepository } from '../../domain/scoring-records.repo';
 import { ScoringRecordFactory } from '../../domain/types/factory';
 import { ScoringRecordReason } from '../../domain/scoring-record-reason';
-import { PersistenceRepository, Repository } from '@common/persistence';
+import { PersistenceRepository, Repository } from '@mertxe/core';
 
 @Repository({
   table: 'ScoringRecords',
