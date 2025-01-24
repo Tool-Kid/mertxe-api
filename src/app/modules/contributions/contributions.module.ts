@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ContributionsRepository } from './domain/contributions.repo';
 import { ContributionsRepositoryImpl } from './infra/persistence/contributions-impl.repo';
 import { GetContributionsQryHdler } from './application/get-contributions/get-contributions.qry.hdler';
-import { SupabaseModule } from '@mertxe/core';
+import { PersistenceModule } from '@mertxe/core';
 import { GetContributionsController } from './infra/http/get-contributions/get-contributions.controller';
 import { CqrsModule } from '@nestjs/cqrs';
 import { AddContributionCmdHdlr } from './application/add-contribution/add-contributions.cmd.hdlr';
@@ -16,7 +16,7 @@ const COMMAND_HANDLERS = [AddContributionCmdHdlr, ApproveContributionCmdHdlr];
 @Module({
   imports: [
     CqrsModule,
-    SupabaseModule.forFeature({
+    PersistenceModule.forFeature({
       repositories: [
         {
           provide: ContributionsRepository,

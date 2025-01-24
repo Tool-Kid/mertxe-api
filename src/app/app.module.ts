@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './modules/auth/auth.module';
-import { SupabaseModule } from '@mertxe/core';
+import { PersistenceModule } from '@mertxe/core';
 import { TimeClockModule } from './modules/time-clock/time-clock.module';
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
@@ -15,7 +15,7 @@ import { RolesGuard } from '@modules/auth/infra/passport/jwt/roles.guard';
 import { ChallengesModule } from './modules/challenges/challenges.module';
 
 const THIRD_PARTY_MODULES = [
-  SupabaseModule.forRoot(),
+  PersistenceModule.forRoot({ adapter: 'supabase' }),
   EventsModule.forRoot(),
   CqrsModule.forRoot(),
   ClsModule.forRoot({

@@ -33,10 +33,11 @@ export class PersistenceModule {
     const module = PersistenceModuleFactory.buildForFeatureForAdapter(
       PersistenceAdapterName.SUPABASE,
       options
-    );
+    )();
     return {
       module: PersistenceModule,
-      imports: [module()],
+      imports: [module],
+      exports: [module],
     };
   }
 }

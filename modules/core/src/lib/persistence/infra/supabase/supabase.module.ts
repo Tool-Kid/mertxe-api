@@ -47,7 +47,7 @@ export class SupabaseModule {
         },
         ...REPOSITORY_PROVIDERS,
       ],
-      exports: [...REPOSITORY_PROVIDERS],
+      exports: [...REPOSITORY_PROVIDERS.map((provider) => provider.provide)],
     };
   }
 }
