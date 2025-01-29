@@ -5,6 +5,7 @@ interface EmailNotificationData {
   to: string;
   subject: string;
   content: string;
+  data: object;
 }
 
 export class EmailNotification extends Notification<EmailNotificationData> {

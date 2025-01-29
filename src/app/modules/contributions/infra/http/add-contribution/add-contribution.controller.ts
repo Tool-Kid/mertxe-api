@@ -31,6 +31,7 @@ export class AddContributionController {
       type: contribution.get('type'),
       comments: contribution.get('comments'),
       points: contribution.get('points'),
+      status: contribution.get('status'),
     });
   }
 }

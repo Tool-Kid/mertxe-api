@@ -3,7 +3,7 @@ import { AddContributionCmd } from './add-contribution.cmd';
 import { Contribution } from '@modules/contributions/domain/contribution';
 import { ContributionsRepository } from '@modules/contributions/domain/contributions.repo';
 
-@CommandHandler({ name: 'f' })
+@CommandHandler(AddContributionCmd)
 export class AddContributionCmdHdlr
   implements ICommandHandler<AddContributionCmd, Contribution>
 {

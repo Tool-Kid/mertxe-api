@@ -1,4 +1,8 @@
-import { Notification, NotificationsPublisher } from '../../../domain';
+import {
+  EmailNotification,
+  Notification,
+  NotificationsPublisher,
+} from '../../../domain';
 import { createTransport, Transporter } from 'nodemailer';
 import { TransporterOptions } from './transporter-options';
 import { NodemailerNotification } from './nodemailer-notification';
@@ -28,11 +32,15 @@ export class NodemailerNotificationsPublisher
   }
 
   async send(notification: Notification<any>): Promise<void> {
+    const emailNotification = notification as EmailNotification;
     const mail = new NodemailerNotification({
       from: this.options.auth.email,
-      to: notification.data.to,
-      subject: notification.data.subject,
-      html: notification.data.content,
+      to: emailNotification.data.to,
+      subject: emailNotification.data.subject,
+      body: {
+        text: emailNotification.data.content,
+        data: emailNotification.data.data,
+      },
     });
     await this.transporter.sendMail(mail.value);
   }

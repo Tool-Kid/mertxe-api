@@ -1,11 +1,11 @@
 import { Notification } from './notification';
-import { NotificationsGlobalRegistry } from './notification';
+import { NotificationsRegistry } from './notification';
 import { NotificationsPublisherRegistry } from './publisher';
 
 export class NotificationsService {
   constructor(
     private readonly publishersRegistry: NotificationsPublisherRegistry,
-    private readonly notificationsRegistry: NotificationsGlobalRegistry
+    private readonly notificationsRegistry: NotificationsRegistry
   ) {}
 
   async send(notification: Notification<any>): Promise<void> {

@@ -5,8 +5,10 @@ import { TimeclockRepositoryImpl } from './infra/persistence/time-clock-impl.rep
 import { ClockOutController } from './infra/http/clock-out/clock-out.controller';
 import { GetTimeClockRecordsController } from './infra/http/get-time-clock/get-time-clock-records.controller';
 import { ClockOutCmdHdlr } from './application/clock-out/clock-out.cmd';
-import { PersistenceModule } from '@mertxe/core';
+import { NotificationsModule, PersistenceModule } from '@mertxe/core';
 import { ClockInCmdHdlr } from './application/clock-in/clock-in-cmd';
+import { TimeClockSessionReportNotification } from '@modules/time-clock/domain/notifications';
+import { TimeClockSessionReportEmailNotification } from '@modules/time-clock/infra/notifications/time-clock-session-report.notification';
 
 const COMMAND_HANDLERS = [ClockInCmdHdlr, ClockOutCmdHdlr];
 
@@ -15,6 +17,14 @@ const COMMAND_HANDLERS = [ClockInCmdHdlr, ClockOutCmdHdlr];
     PersistenceModule.forFeature({
       repositories: [
         { provide: TimeClockRepository, useClass: TimeclockRepositoryImpl },
+      ],
+    }),
+    NotificationsModule.forFeature({
+      notifications: [
+        {
+          report: TimeClockSessionReportNotification,
+          using: [TimeClockSessionReportEmailNotification],
+        },
       ],
     }),
   ],

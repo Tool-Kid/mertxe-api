@@ -3,8 +3,8 @@ import {
   Notification,
   NotificationsPublisher,
   NotificationsService,
+  NotificationsContainer,
   NotificationsRegistry,
-  NotificationsGlobalRegistry,
   NotificationsPublisherRegistry,
   NotificationsPublisherFactory,
   DistributableNotification,
@@ -41,8 +41,8 @@ export class NotificationsModule {
       global: true,
       providers: [
         {
-          provide: NotificationsGlobalRegistry,
-          useValue: new NotificationsGlobalRegistry(),
+          provide: NotificationsRegistry,
+          useValue: new NotificationsRegistry(),
         },
         {
           provide: NotificationsPublisherRegistry,
@@ -56,17 +56,17 @@ export class NotificationsModule {
           provide: NotificationsService,
           useFactory: (
             publishersRegistry: NotificationsPublisherRegistry,
-            notificationsRegistry: NotificationsGlobalRegistry
+            notificationsRegistry: NotificationsRegistry
           ) => {
             return new NotificationsService(
               publishersRegistry,
               notificationsRegistry
             );
           },
-          inject: [NotificationsPublisherRegistry, NotificationsGlobalRegistry],
+          inject: [NotificationsPublisherRegistry, NotificationsRegistry],
         },
       ],
-      exports: [NotificationsService, NotificationsGlobalRegistry],
+      exports: [NotificationsService, NotificationsRegistry],
     };
   }
 
@@ -77,19 +77,19 @@ export class NotificationsModule {
       module: NotificationsModule,
       providers: [
         {
-          provide: NotificationsRegistry,
-          useFactory: (globalRegistry: NotificationsGlobalRegistry) => {
-            const registry = new NotificationsRegistry();
+          provide: NotificationsContainer,
+          useFactory: (globalRegistry: NotificationsRegistry) => {
+            const registry = new NotificationsContainer();
             for (const notification of options.notifications) {
               registry.addNotification(
                 notification.report.name,
                 notification.using
               );
             }
-            globalRegistry.addRegistry(registry);
+            globalRegistry.addContainer(registry);
             return registry;
           },
-          inject: [NotificationsGlobalRegistry],
+          inject: [NotificationsRegistry],
         },
       ],
     };

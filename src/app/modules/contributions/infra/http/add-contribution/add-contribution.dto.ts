@@ -1,3 +1,4 @@
+import { ContributionStatus } from '@modules/contributions/domain/contribution-status';
 import { ContributionType } from '@modules/contributions/domain/contribution-type';
 
 export class AddContributionDto {
@@ -10,4 +11,5 @@ export class AddContributionResponse {
   type: ContributionType;
   comments: string;
   points: number;
+  status: ContributionStatus;
 }
